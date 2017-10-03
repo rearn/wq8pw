@@ -1,5 +1,4 @@
 import unittest
-import json
 import des
 
 class test_des(unittest.TestCase):
