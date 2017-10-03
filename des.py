@@ -16,7 +16,8 @@ class des():
 
     def decode(self, cipher_number):
         if(self.is_under_8_octets(int.from_bytes(cipher_number, 'big'))):
-            return self.des.decrypt(cipher_number)
+            ret = self.des.decrypt(cipher_number)
+            return int.from_bytes(ret, 'big')
         else:
             raise Exception()
 
