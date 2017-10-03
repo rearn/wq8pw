@@ -22,7 +22,7 @@ class test_des(unittest.TestCase):
         self.assertRaises(self.des.encode(0xfedcba9876543210f))
 
     def test_decode_raieses(self):
-        self.assertRaises(self.des.decode(0x12345678fedcba098))
+        self.assertRaises(self.des.decode(b'12345678fedcba098'))
 
     def test_des_init_raieses(self):
         self.assertRaises(des.des(b'0123456789'))
