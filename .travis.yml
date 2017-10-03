@@ -7,7 +7,6 @@ python:
   - 3.6
 
 install:
-  - pip install flask pycrypto pymongo
   - pip install tox tox-travis
   - pip install coverage coveralls
 
