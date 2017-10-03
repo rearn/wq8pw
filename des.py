@@ -9,14 +9,13 @@ class des():
 
 
     def encode(self, plain_number):
-        byte = plain_number.to_bytes(8, 'big')
-        if(self.is_under_8_octets(byte)):
-            return self.des.encrypt(byte)
+        if(self.is_under_8_octets(plain_number)):
+            return self.des.encrypt(plain_number.to_bytes(8, 'big'))
         else:
             raise Exception()
 
     def decode(self, cipher_number):
-        if(self.is_under_8_octets(cipher_number)):
+        if(self.is_under_8_octets(int.from_bytes(cipher_number, 'big'))):
             return self.des.decrypt(cipher_number)
         else:
             raise Exception()
