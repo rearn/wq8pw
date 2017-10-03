@@ -19,14 +19,14 @@ class test_des(unittest.TestCase):
         self.assertFalse(self.des.is_under_8_octets(0x1234567890abcdef0))
 
     def test_encode_raieses(self):
-        self.assertRaises(Exception, self.des.encode(0xfedcba9876543210f))
+        self.assertRaises(Exception, lambda: self.des.encode(0xfedcba9876543210f))
 
     def test_decode_raieses(self):
-        self.assertRaises(Exception, self.des.decode(b'12345678fedcba098'))
+        self.assertRaises(Exception, lambda: self.des.decode(b'12345678fedcba098'))
 
     def test_des_init_raieses(self):
-        self.assertRaises(Exception, des.des(b'0123456789'))
-        self.assertRaises(Exception, des.des(b'98765'))
+        self.assertRaises(Exception, lambda: des.des(b'0123456789'))
+        self.assertRaises(Exception, lambda: des.des(b'98765'))
 
 
 if __name__ == '__main__':
