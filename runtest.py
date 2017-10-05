@@ -4,7 +4,7 @@ from unittest import TestLoader, TextTestRunner
 from sys import argv, exit
 
 if __name__ == "__main__":
-    suite = TestLoader().discover('tests', pattern = "test_*.py")
+    suite = TestLoader().discover('tests', pattern="test_*.py")
     v = 1
     if len(argv) > 1:
         if argv[1] == 'verbose':
