@@ -1,12 +1,12 @@
 from Crypto.Cipher import DES
 
+
 class des():
     def __init__(self, key):
         if len(key) == 8:
             self.des = DES.new(key, DES.MODE_ECB)
         else:
             raise Exception()
-
 
     def encode(self, plain_number):
         if(self.is_under_8_octets(plain_number)):
