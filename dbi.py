@@ -39,5 +39,5 @@ class dbi():
             if len(db_uri.find({'id': id})) == 0:
                 db_uri.insert_one({'id': id, 'uri': uri})
                 return id
-            else:
+            else:  # pragma: no cover
                 raise Exception()
