@@ -9,7 +9,6 @@ class dbi():
     def find_uri(self, uri_id):
         db_uri = self.__db.uri
         ret = list(db_uri.find({'id': uri_id}))
-        print(ret)
         if len(ret) == 1:
             return ret[0]['uri']
         else:
