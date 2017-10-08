@@ -19,7 +19,7 @@ class dbi():
         ret = list(
             db_uri.find({'uri': uri}))
         if len(ret) == 1:
-            return ret[0]['id']
+            return int(ret[0]['id'])
         else:
             return None
 
