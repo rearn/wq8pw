@@ -29,6 +29,7 @@ class dbi():
         else:
             db_cs = self.__db.counters
             ret = db_cs.find_and_modify({'id': 'uri_id'}, {'$inc': {'seq': 1}})
+            print(ret)
             uri_id = ret['seq']
             db_uri = self.__db.uri
             if self.find_uri(uri_id) is None:
