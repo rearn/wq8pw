@@ -14,6 +14,10 @@ class test_dbi(unittest.TestCase):
             db_cs.insert_one({'id': 'uri_id', 'seq': 2})
         self.db = dbi.dbi('mongodb://localhost/testdb', 'testdb')
 
+    def tearDown(self):
+        with MongoClient('mongodb://localhost/testdb') as client:
+            client.drop_database('testdb')
+
     def test_find_uri(self):
         self.assertEqual(self.db.find_uri(0), 'http://example.com/')
         self.assertEqual(self.db.find_uri(1), 'http://example.org/test.html')
