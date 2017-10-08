@@ -32,7 +32,7 @@ class dbi():
             ret = db_cs.find_and_modify({'id': 'uri_id'}, {'$inc': {'seq': 1}})
             uri_id = ret['seq']
             db_uri = self.__db.uri
-            if len(db_uri.find({'id': uri_id})) == 0:
+            if self.find_uri(uri_id) is Null:
                 db_uri.insert_one({'id': uri_id, 'uri': uri})
                 return uri_id
             else:  # pragma: no cover
