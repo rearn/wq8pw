@@ -27,7 +27,6 @@ class dbi():
         if uri_id is not None:
             return uri_id
         else:
-            print("koko")
             db_cs = self.__db.counters
             ret = db_cs.find_and_modify({'id': 'uri_id'}, {'$inc': {'seq': 1}})
             print(ret)
