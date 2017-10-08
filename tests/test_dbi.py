@@ -32,6 +32,7 @@ class test_dbi(unittest.TestCase):
         self.assertEqual(self.db.update('http://example.com/'), 0)
         self.assertEqual(self.db.update('http://example.org/test.html'), 1)
         ret = self.db.find_id('http://example.net/')
+        self.assertEqual(ret, 2)
         self.assertEqual(self.db.find_uri(ret), 'http://example.net/')
         self.assertEqual(self.db.find_id('http://example.net/'), ret)
         self.assertEqual(self.db.update('http://example.net/'), ret)
