@@ -1,6 +1,7 @@
 [report]
 include =
     des.py
+    dbi.py
 
 exclude_lines =
     pragma: no cover
