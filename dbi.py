@@ -16,8 +16,7 @@ class dbi():
 
     def find_id(self, uri):
         db_uri = self.__db.uri
-        ret = list(
-            db_uri.find({'uri': uri}))
+        ret = list(db_uri.find({'uri': uri}))
         if len(ret) == 1:
             return int(ret[0]['id'])
         else:
