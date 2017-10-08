@@ -11,6 +11,8 @@ install:
   - pip install tox tox-travis
   - pip install coverage coveralls
 
+services: mongodb
+
 script:
   - tox
 
