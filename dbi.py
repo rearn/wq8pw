@@ -6,9 +6,9 @@ class dbi():
         self.__client = MongoClient(uri)
         self.__db = self.__client[db_name]
 
-    def find_uri(self, id):
+    def find_uri(self, uri_id):
         db_uri = self.__db.uri
-        ret = list(db_uri.find({'id': id}))
+        ret = list(db_uri.find({'id': uri_id}))
         if len(ret) == 1:
             return ret[0]['uri']
         else:
@@ -24,21 +24,18 @@ class dbi():
             return None
 
     def update(self, uri):
-        id = self.find_id(uri)
-        if id is not None:
-            return id
+        uri_id = self.find_id(uri)
+        if uri_id is not None:
+            return uri_id
         else:
-            db_counters = self.__db.counters
+            db_cs = self.__db.counters
             ret = list(
-                db_counters.find_and_modify(
-                    {'id': 'uri_id'},
-                    {'$inc': {'seq': 1}}
-                )
+                db_cs.find_and_modify({'id': 'uri_id'}, {'$inc': {'seq': 1}})
             )
-            id = ret[0]['seq']
+            uri_id = ret[0]['seq']
             db_uri = self.__db.uri
-            if len(db_uri.find({'id': id})) == 0:
-                db_uri.insert_one({'id': id, 'uri': uri})
-                return id
+            if len(db_uri.find({'id': uri_id})) == 0:
+                db_uri.insert_one({'id': uri_id, 'uri': uri})
+                return uri_id
             else:  # pragma: no cover
                 raise Exception()
