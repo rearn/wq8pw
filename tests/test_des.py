@@ -1,6 +1,7 @@
 import unittest
 import des
 
+
 class test_des(unittest.TestCase):
     def setUp(self):
         self.des = des.des(b'abcdefgh')
@@ -14,9 +15,9 @@ class test_des(unittest.TestCase):
         self.assertEqual(ret, 255)
 
     def test_is_under_8_octets(self):
-        self.assertTrue(self.des.is_under_8_octets(42))
-        self.assertTrue(self.des.is_under_8_octets(0x1145148108931919))
-        self.assertFalse(self.des.is_under_8_octets(0x1234567890abcdef0))
+        self.assertTrue(self.des.__des__is_under_8_octets(42))
+        self.assertTrue(self.des.__des__is_under_8_octets(0x1145148108931919))
+        self.assertFalse(self.des.__des__is_under_8_octets(0x1234567890abcdef0))
 
     def test_encode_raieses(self):
         self.assertRaises(Exception, lambda: self.des.encode(0xfedcba9876543210f))
