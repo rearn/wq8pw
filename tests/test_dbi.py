@@ -31,3 +31,7 @@ class test_dbi(unittest.TestCase):
         self.assertEqual(self.db.find_uri(ret), 'http://example.net/')
         self.assertEqual(self.db.find_id('http://example.net/'), ret)
         self.assertEqual(self.db.update('http://example.net/'), ret)
+
+    def SetDown(self):
+        with MongoClient('mongodb://localhost/testdb') as client:
+            client.drop_database('testdb')
