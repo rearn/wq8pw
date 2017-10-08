@@ -29,10 +29,8 @@ class dbi():
             return uri_id
         else:
             db_cs = self.__db.counters
-            ret = list(
-                db_cs.find_and_modify({'id': 'uri_id'}, {'$inc': {'seq': 1}})
-            )
-            uri_id = ret[0]['seq']
+            ret = db_cs.find_and_modify({'id': 'uri_id'}, {'$inc': {'seq': 1}})
+            uri_id = ret['seq']
             db_uri = self.__db.uri
             if len(db_uri.find({'id': uri_id})) == 0:
                 db_uri.insert_one({'id': uri_id, 'uri': uri})
