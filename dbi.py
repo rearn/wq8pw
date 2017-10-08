@@ -8,7 +8,12 @@ class dbi():
 
     def find_uri(self, id):
         db_uri = self.__db.uri
-        ret = list(db_uri.find({'id': id}, {'id': False, 'uri': True}))
+        ret = list(
+            db_uri.find(
+                {'id': id},
+                {'_id': False, 'id': False, 'uri': True}
+            )
+        )
         if len(ret) == 1:
             return ret[0]['uri']
         else:
@@ -16,7 +21,12 @@ class dbi():
 
     def find_id(self, uri):
         db_uri = self.__db.uri
-        ret = list(db_uri.find({'uri': uri}, {'id': True, 'uri': False}))
+        ret = list(
+            db_uri.find(
+                {'uri': uri},
+                {'_id': False, 'id': True, 'uri': False}
+            )
+        )
         if len(ret) == 1:
             return ret[0]['id']
         else:
