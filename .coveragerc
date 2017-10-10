@@ -2,6 +2,7 @@
 include =
     des.py
     dbi.py
+    base64_32.py
 
 exclude_lines =
     pragma: no cover
