@@ -8,8 +8,8 @@ class test_dbi(unittest.TestCase):
         with MongoClient('mongodb://localhost/testdb') as client:
             db = client.testdb
             db_uri = db.uri
-            db_uri.insert_one({'id': 0, 'uri': 'http://example.com/'}, 'type': 0)
-            db_uri.insert_one({'id': 1, 'uri': 'http://example.org/test.html'}, 'type': 1)
+            db_uri.insert_one({'id': 0, 'uri': 'http://example.com/', 'type': 0})
+            db_uri.insert_one({'id': 1, 'uri': 'http://example.org/test.html', 'type': 1})
             db_cs = db.counters
             db_cs.insert_one({'id': 'uri_id', 'seq': 2})
         self.db = dbi.dbi('mongodb://localhost/testdb', 'testdb')
