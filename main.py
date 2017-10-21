@@ -1,7 +1,7 @@
 import base64_32
 import dbi
 import des
-from flask import abort, Flask, redirect
+from flask import abort, Flask, redirect, request, url_for
 from configparser import ConfigParser
 
 
@@ -10,6 +10,21 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
+    pass
+
+
+@app.route('/accept/post', methods=['GET', 'POST'])
+def accept_post(arg):
+    if request.method == 'POST':
+        # request.form['date']
+        pass
+        redirect(url_for('accept_success'), code=303)
+    else:
+        redirect(url_for('root'), code=301)
+
+
+@app.route('/accept/success')
+def accept_success(arg):
     pass
 
 
