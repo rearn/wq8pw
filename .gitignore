@@ -99,3 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# wq8pw
+wq8pw.ini

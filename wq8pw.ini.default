@@ -1,0 +1,6 @@
+[db]
+uri=mongodb://localhost/flaskdb
+name=flaskdb
+
+[des]
+key=12345678

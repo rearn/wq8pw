@@ -13,6 +13,9 @@ install:
 
 services: mongodb
 
+before_script:
+  - make wq8pw.ini
+
 script:
   - tox
 

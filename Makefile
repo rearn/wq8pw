@@ -1,6 +1,10 @@
+CP      = cp
 RUNTEST = ./runtest.py
 MAKE    = make
 COVERAGE= coverage
+
+wq8pw.ini: wq8pw.ini.default
+	$(CP) $< $@
 
 test:
 	$(RUNTEST)

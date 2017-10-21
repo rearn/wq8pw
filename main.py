@@ -2,6 +2,7 @@ import base64_32
 import dbi
 import des
 from flask import abort, Flask, redirect
+from configparser import ConfigParser
 
 
 app = Flask(__name__)
@@ -32,5 +33,8 @@ def path(base):
 
 
 if __name__ == '__main__':
-    crypt = des.des('12345678')
-    db = dbi.dbi('mongodb://localhost/flaskdb', 'flaskdb')
+    config = ConfigParser()
+    config.read('wq8pw.ini')
+
+    crypt = des.des(config['des']['key'])
+    db = dbi.dbi(config['db']['uri'], config['db']['name'])
