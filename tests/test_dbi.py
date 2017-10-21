@@ -42,12 +42,12 @@ class test_dbi(unittest.TestCase):
         ret = self.db.update('http://example.net/', 0)
         self.assertEqual(ret, 2)
         self.assertEqual(self.db.find_uri(ret), {'uri': 'http://example.net/', 'type': 0})
-        self.assertEqual(self.db.find_id_and_type('http://example.net/'), ret)
+        self.assertEqual(self.db.find_id_and_type('http://example.net/', 0), ret)
         self.assertEqual(self.db.update('http://example.net/', 0), ret)
 
     def test_update_change_type(self):
         ret = self.db.update('http://example.com/', 1)
         self.assertEqual(ret, 2)
         self.assertEqual(self.db.find_uri(ret), {'uri': 'http://example.com/', 'type': 1})
-        self.assertEqual(self.db.find_id_and_type('http://example.com/'), ret)
+        self.assertEqual(self.db.find_id_and_type('http://example.com/', 1), ret)
         self.assertEqual(self.db.update('http://example.com/', 0), ret)
