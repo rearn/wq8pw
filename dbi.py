@@ -26,7 +26,7 @@ class dbi():
 
     def find_id_and_type(self, uri, redirect_type):
         db_uri = self.__db.uri
-        ret = db_uri.find({'uri': uri, 'type': redirect_type})
+        ret = list(db_uri.find({'uri': uri, 'type': redirect_type}))
         if len(ret) == 1:
             return int(ret[0]['id'])
         else:
