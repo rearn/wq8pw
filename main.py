@@ -20,6 +20,8 @@ def path(base):
         code = base64_32.base32decode(base)
     else:
         return abort(404)
+    if code is None:
+        return abort(404)
     num = crypt.decode(code)
     uri = db.find_uri(num)
     app.logger.debug({'base': base, 'code': code, 'num': num, 'uri': uri})
