@@ -23,7 +23,7 @@ class test_dbi(unittest.TestCase):
         self.assertEqual(self.db.find_uri(1), {'uri': 'http://example.org/test.html', 'type': 1})
         self.assertIsNone(self.db.find_uri(42))
 
-    def test_find_id(arg):
+    def test_find_id(self):
         self.assertEqual(self.db.find_id('http://example.com/'), {'id': 0, 'type': 0})
         self.assertEqual(self.db.find_id('http://example.org/test.html'), {'id': 1, 'type': 1})
         self.assertIsNone(self.db.find_id('http://example.org/none.html'))
