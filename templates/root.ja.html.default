@@ -2,11 +2,11 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>{{ root.title }}; URI Shortener</title>
+    <title>{{ root.name }}; URI Shortener</title>
 </head>
 <body>
     <header>
-        <h1>短縮URLサービス {{ root.title }} にようこそ</h1>
+        <h1>短縮URLサービス {{ root.name }} にようこそ</h1>
     </header>
     <section id="main">
         <h2>当サイトについて</h2>
