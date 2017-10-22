@@ -28,6 +28,7 @@ class test_des(unittest.TestCase):
         self.assertEqual(base64_32.base32decode('geytinjrgq2de'), b'11451442')
         self.assertEqual(base64_32.base32decode('737p57x777776'), b'\xfe\xfe\xfe\xfe\xff\xff\xff\xff')
         self.assertIsNone(base64_32.base32decode('12345678'))
+        self.assertIsNone(base64_32.base32decode('123456_654321'))
 
 
 if __name__ == '__main__':
