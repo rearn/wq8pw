@@ -37,7 +37,7 @@ def accept_post():
         }
         return render_template('post.ja.html', root=root)
     else:
-        redirect(url_for('root'), code=301)
+        return redirect(url_for('root'), code=301)
 
 
 @app.route('/<string:base>')
