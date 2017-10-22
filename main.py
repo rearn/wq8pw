@@ -29,8 +29,8 @@ def accept_post():
         redirect_type = 1 if request.form.get('jamp_flag') else 0
         num = db.update(uri, redirect_type)
         code = crypt.encode(num)
-        base32 = base64_32.base64encode(code)
-        base64 = base64_32.base32encode(code)
+        base32 = base64_32.base32encode(code)
+        base64 = base64_32.base64encode(code)
         root = {
             'uri13': url_for('path', base=base32),
             'uri11': url_for('path', base=base64),
