@@ -31,10 +31,9 @@ def accept_post():
         code = crypt.encode(num)
         base32 = base64_32.base32encode(code)
         base64 = base64_32.base64encode(code)
-        root = {
-            'uri13': url_for('path', base=base32),
-            'uri11': url_for('path', base=base64),
-        }
+        uri13 = url_for('path', base=base32, _external=True, _scheme='https')
+        uri11 = url_for('path', base=base64, _external=True, _scheme='https')
+        root = {'uri13': uri13, 'uri11': uri11}
         return render_template('post.ja.html', root=root)
     else:
         return redirect(url_for('root'), code=301)
