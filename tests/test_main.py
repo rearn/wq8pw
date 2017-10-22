@@ -33,22 +33,27 @@ class test_main(unittest.TestCase):
     def test_update_changeless_type(self):
         rv = self.app.post('/accept/post', data={'uri': 'http://example.com/'})
         self.assertEqual(rv.status_code, 200)
-        print(rv.data.decode())  # debug
+        self.assertRegex(rv.data.decode(), '4s5yxhl6exkos')
+        self.assertRegex(rv.data.decode(), '5LuLnX4l1Ok')
 
     def test_update_change_type(self):
         rv = self.app.post('/accept/post', data={'uri': 'http://example.com/', 'jamp_flag': 1})
         self.assertEqual(rv.status_code, 200)
-        print(rv.data.decode())  # debug
+        self.assertRegex(rv.data.decode(), 'hv2zlkml76aj2')
+        self.assertRegex(rv.data.decode(), 'PXWVqYv_gJ0')
 
     def test_update(self):
         rv = self.app.post('/accept/post', data={'uri': 'http://example.net/'})
         self.assertEqual(rv.status_code, 200)
-        print(rv.data.decode())  # debug
+        self.assertRegex(rv.data.decode(), '4s5yxhl6exkos')
+        self.assertRegex(rv.data.decode(), '5LuLnX4l1Ok')
 
     def test_update2(self):
         rv = self.app.post('/accept/post', data={'uri': 'http://example.org/test.html', 'jamp_flag': 1})
         self.assertEqual(rv.status_code, 200)
-        print(rv.data.decode())  # debug
+        self.assertRegex(rv.data.decode(), 'hjgk26lm7v6qg')
+        self.assertRegex(rv.data.decode(), 'OkyteWz9fQM')
+
 
 if __name__ == '__main__':
     unittest.main()
