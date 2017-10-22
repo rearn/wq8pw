@@ -65,6 +65,6 @@ def path(base):
             'type': uri['type']
         })
         if uri['type'] == 0:
-            return redirect(uri, code=301)
+            return redirect(uri['uri'], code=301)
         else:
             return render_template('antenna.ja.html', root=uri)
