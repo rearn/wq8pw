@@ -46,11 +46,20 @@ def path(base):
         return abort(404)
     num = crypt.decode(code)
     uri = db.find_uri(num)
-    app.logger.debug({'base': base, 'code': code, 'num': num, 'uri': uri})
     if uri is None:
         return abort(404)
     else:
-        return redirect(uri, code=301)
+        app.logger.debug({
+            'base': base,
+            'code': code,
+            'num': num,
+            'uri': uri['uri'],
+            'type': uri['type']
+        })
+        if uri['type'] == 0:
+            return redirect(uri, code=301)
+        else:
+            return render_template('antenna.ja.html', root=uri)
 
 
 if __name__ == '__main__':

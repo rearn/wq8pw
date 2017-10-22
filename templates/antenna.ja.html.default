@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation</title>
+</head>
+<body>
+    <header>
+        <h1>確認ください</h1>
+    </header>
+    <section>
+        <p>
+            要求されたアクセスは以下の URL です。
+        </p>
+        <a href="{{ root.uri }}">{{ root.uri }}</a>
+    </section>
+</body>
+</html>
