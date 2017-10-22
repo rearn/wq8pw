@@ -5,14 +5,14 @@ COVERAGE= coverage
 
 TEMPLATES= templates
 
-before_test: config $(TEMPLATES)
+before_test: config templates
 
 config: wq8pw.ini
 
 wq8pw.ini: wq8pw.ini.default
 	$(CP) $< $@
 
-$(TEMPLATES): $(TEMPLATES)/Makefile
+templates: $(TEMPLATES)/Makefile
 	$(MAKE) -C $(TEMPLATES) all
 
 test:
