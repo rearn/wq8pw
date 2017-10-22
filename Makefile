@@ -7,7 +7,11 @@ TEMPLATES= templates
 
 before_test:
 	$(MAKE) config
+	$(MAKE) clean_templates
 	$(MAKE) templates
+
+clean_templates: tests/Makefile
+	$(MAKE) -C tests clean
 
 config: wq8pw.ini
 

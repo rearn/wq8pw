@@ -1,6 +1,12 @@
 CP      = cp
+RM      = rm -f
 
-all: root.ja.html post.ja.html antenna.ja.html
+TEMPLATES = root.ja.html post.ja.html antenna.ja.html
+
+all: $(TEMPLATES)
+
+clean:
+	$(RM) $(TEMPLATES)
 
 root.ja.html: root.ja.html.default
 	$(CP) $< $@
