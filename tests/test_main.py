@@ -31,7 +31,7 @@ class test_main(unittest.TestCase):
     def test_path_antenna_long(self):
         rv = self.app.get('/hjgk26lm7v6qg')
         self.assertEqual(rv.status_code, 200)
-        self.assertEqual(rv.data.decode(), 'http://example.org/test.html')
+        self.assertRegex(rv.data.decode(), 'http://example.org/test.html')
 
     def test_path_redirect_short(self):
         rv = self.app.get('/5LuLnX4l1Ok')
@@ -39,12 +39,12 @@ class test_main(unittest.TestCase):
         self.assertEqual(rv.location, 'http://example.com/')
 
     def test_path_antenna_short(self):
-        rv = self.app.get('/PXWVqYv_gJ0')
+        rv = self.app.get('/OkyteWz9fQM')
         self.assertEqual(rv.status_code, 200)
-        self.assertEqual(rv.data.decode(), 'http://example.org/test.html')
+        self.assertRegex(rv.data.decode(), 'http://example.org/test.html')
 
     def test_path_error_uri_none(self):
-        rv = self.app.get('/1234567890a')
+        rv = self.app.get('/PXWVqYv_gJ0')
         self.assertEqual(rv.status_code, 404)
 
     def test_path_error_different_path(self):
