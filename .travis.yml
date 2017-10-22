@@ -14,6 +14,7 @@ install:
 services: mongodb
 
 before_script:
+  - mongo testdb --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - make wq8pw.ini
 
 script:
