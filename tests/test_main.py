@@ -24,7 +24,7 @@ class test_main(unittest.TestCase):
         self.assertRegex(rv.data.decode(), '<h1>短縮URLサービス wq8pw にようこそ</h1>')
 
     def test_path_redirect_long(self):
-        rv = self.app.get('/4s5yxhl6exkos')
+        rv = self.app.get('/hv2zlkml76aj2')
         self.assertEqual(rv.status_code, 301)
         self.assertEqual(rv.location, 'http://example.com/')
 
@@ -34,7 +34,7 @@ class test_main(unittest.TestCase):
         self.assertRegex(rv.data.decode(), 'http://example.org/test.html')
 
     def test_path_redirect_short(self):
-        rv = self.app.get('/5LuLnX4l1Ok')
+        rv = self.app.get('/PXWVqYv_gJ0')
         self.assertEqual(rv.status_code, 301)
         self.assertEqual(rv.location, 'http://example.com/')
 
@@ -44,7 +44,7 @@ class test_main(unittest.TestCase):
         self.assertRegex(rv.data.decode(), 'http://example.org/test.html')
 
     def test_path_error_uri_none(self):
-        rv = self.app.get('/PXWVqYv_gJ0')
+        rv = self.app.get('/5LuLnX4l1Ok')
         self.assertEqual(rv.status_code, 404)
 
     def test_path_error_different_path(self):
