@@ -43,6 +43,18 @@ class test_main(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.data.decode(), 'http://example.org/test.html')
 
+    def test_path_error_uri_none(self):
+        rv = self.app.get('/1234567890a')
+        self.assertEqual(rv.status_code, 404)
+
+    def test_path_error_different_path(self):
+        rv = self.app.get('/1234567890ab')
+        self.assertEqual(rv.status_code, 404)
+
+    def test_path_error_code_none(self):
+        rv = self.app.get('/1234567890ab_')
+        self.assertEqual(rv.status_code, 404)
+
     def test_get_update(self):
         rv = self.app.get('/accept/post')
         self.assertEqual(rv.status_code, 301)
