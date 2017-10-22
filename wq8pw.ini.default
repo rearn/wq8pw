@@ -1,6 +1,6 @@
 [db]
-uri=mongodb://localhost/flaskdb
-name=flaskdb
+uri=mongodb://travis:test@localhost/testdb
+name=testdb
 
 [des]
 key=12345678
