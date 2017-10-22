@@ -58,7 +58,7 @@ class test_main(unittest.TestCase):
     def test_get_update(self):
         rv = self.app.get('/accept/post')
         self.assertEqual(rv.status_code, 301)
-        self.assertEqual(rv.location, '')
+        self.assertEqual(rv.location, 'https://localhost/')
 
     def test_update_changeless_type(self):
         rv = self.app.post('/accept/post', data={'uri': 'http://example.com/'})
