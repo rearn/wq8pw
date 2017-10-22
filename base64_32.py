@@ -1,4 +1,5 @@
 import base64
+import binascii
 
 
 def base64encode(s):
@@ -26,4 +27,8 @@ def base32decode(s):
         s += '==='
     else:
         return None
-    return base64.b32decode(s.upper(), casefold=True, map01='l')
+    try:
+        base32 = base64.b32decode(s.upper(), casefold=True, map01='l')
+    except binascii.Error:
+        base32 = None
+    return base32
