@@ -7,6 +7,12 @@ from configparser import ConfigParser
 
 app = Flask(__name__)
 
+config = ConfigParser()
+config.read('wq8pw.ini')
+
+crypt = des.des(config['des']['key'])
+db = dbi.dbi(config['db']['uri'], config['db']['name'])
+
 
 @app.route('/')
 def root():
@@ -60,11 +66,3 @@ def path(base):
             return redirect(uri, code=301)
         else:
             return render_template('antenna.ja.html', root=uri)
-
-
-if __name__ == '__main__':
-    config = ConfigParser()
-    config.read('wq8pw.ini')
-
-    crypt = des.des(config['des']['key'])
-    db = dbi.dbi(config['db']['uri'], config['db']['name'])
