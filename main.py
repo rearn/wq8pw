@@ -46,7 +46,7 @@ def accept_post():
 def path(base):
     if len(base) == 11:
         code = base64_32.base64decode(base)
-    elif len() == 13:
+    elif len(base) == 13:
         code = base64_32.base32decode(base)
     else:
         return abort(404)
