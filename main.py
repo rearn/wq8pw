@@ -32,8 +32,8 @@ def accept_post():
         base32 = base64_32.base64encode(code)
         base64 = base64_32.base32encode(code)
         root = {
-            'uri13': url_for(path, base=base32),
-            'uri11': url_for(path, base=base64),
+            'uri13': url_for('path', base=base32),
+            'uri11': url_for('path', base=base64),
         }
         return render_template('post.ja.html', root=root)
     else:
