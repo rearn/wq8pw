@@ -26,7 +26,7 @@ class test_main(unittest.TestCase):
     def test_path_redirect_long(self):
         rv = self.app.get('/hv2zlkml76aj2')
         self.assertEqual(rv.status_code, 301)
-        self.assertEqual(rv.location, 'http://example.com/')
+        self.assertEqual(rv.headers['location'], 'http://example.com/')
 
     def test_path_antenna_long(self):
         rv = self.app.get('/hjgk26lm7v6qg')
@@ -36,7 +36,7 @@ class test_main(unittest.TestCase):
     def test_path_redirect_short(self):
         rv = self.app.get('/PXWVqYv_gJ0')
         self.assertEqual(rv.status_code, 301)
-        self.assertEqual(rv.location, 'http://example.com/')
+        self.assertEqual(rv.headers['location'], 'http://example.com/')
 
     def test_path_antenna_short(self):
         rv = self.app.get('/OkyteWz9fQM')
