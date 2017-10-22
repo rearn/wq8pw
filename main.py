@@ -36,7 +36,10 @@ def accept_post():
         root = {'uri13': uri13, 'uri11': uri11}
         return render_template('post.ja.html', root=root)
     else:
-        return redirect(url_for('root'), code=301)
+        return redirect(
+            url_for('root', _external=True, _scheme='https'),
+            code=301
+        )
 
 
 @app.route('/<string:base>')
