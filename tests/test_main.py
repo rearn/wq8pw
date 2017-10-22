@@ -23,12 +23,30 @@ class test_main(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertRegex(rv.data.decode(), '<h1>短縮URLサービス wq8pw にようこそ</h1>')
 
-    def test_pass(self):
-        pass
+    def test_path_redirect_long(self):
+        rv = self.app.get('/4s5yxhl6exkos')
+        self.assertEqual(rv.status_code, 301)
+        self.assertEqual(rv.location, 'http://example.com/')
+
+    def test_path_antenna_long(self):
+        rv = self.app.get('/hjgk26lm7v6qg')
+        self.assertEqual(rv.status_code, 200)
+        self.assertEqual(rv.data.decode(), 'http://example.org/test.html')
+
+    def test_path_redirect_short(self):
+        rv = self.app.get('/5LuLnX4l1Ok')
+        self.assertEqual(rv.status_code, 301)
+        self.assertEqual(rv.location, 'http://example.com/')
+
+    def test_path_antenna_short(self):
+        rv = self.app.get('/PXWVqYv_gJ0')
+        self.assertEqual(rv.status_code, 200)
+        self.assertEqual(rv.data.decode(), 'http://example.org/test.html')
 
     def test_get_update(self):
         rv = self.app.get('/accept/post')
         self.assertEqual(rv.status_code, 301)
+        self.assertEqual(rv.location, '')
 
     def test_update_changeless_type(self):
         rv = self.app.post('/accept/post', data={'uri': 'http://example.com/'})
