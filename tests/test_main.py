@@ -55,6 +55,10 @@ class test_main(unittest.TestCase):
         rv = self.app.get('/1234567890ab_')
         self.assertEqual(rv.status_code, 404)
 
+    def test_path_error_over_52bit(self):
+        rv = self.app.get('/1234567890a')
+        self.assertEqual(rv.status_code, 404)
+
     def test_get_update(self):
         rv = self.app.get('/accept/post')
         self.assertEqual(rv.status_code, 301)
