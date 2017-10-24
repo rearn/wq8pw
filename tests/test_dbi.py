@@ -11,7 +11,7 @@ class test_dbi(unittest.TestCase):
             db_uri.insert_one({'id': 0, 'uri': 'http://example.com/', 'type': 0})
             db_uri.insert_one({'id': 1, 'uri': 'http://example.org/test.html', 'type': 1})
             db_cs = db.counters
-            db_cs.insert_one({'id': 'uri_id', 'seq': 2})
+            db_cs.insert_one({'id': 'uri_id', 'seq': '2'})
         self.db = dbi.dbi('mongodb://travis:test@localhost/testdb', 'testdb')
 
     def tearDown(self):
