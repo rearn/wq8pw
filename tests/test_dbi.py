@@ -51,3 +51,7 @@ class test_dbi(unittest.TestCase):
         self.assertEqual(self.db.find_uri(ret), {'uri': 'http://example.com/', 'type': 1})
         self.assertEqual(self.db.find_id_and_type('http://example.com/', 1), ret)
         self.assertEqual(self.db.update('http://example.com/', 1), ret)
+
+    def test_find_uri_id_over_52bit(self):
+        self.assertIsNone(self.db.find_uri(0xfffffffffffff))
+        self.assertIsNone(self.db.find_uri(0x10000000000000))
