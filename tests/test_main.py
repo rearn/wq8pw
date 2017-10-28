@@ -18,6 +18,19 @@ class test_main(unittest.TestCase):
         with MongoClient('mongodb://travis:test@localhost/testdb') as client:
             client.drop_database('testdb')
 
+    def test_is_url(self):
+        self.assertTrue(main.is_url('http://example.com/'))
+        self.assertTrue(main.is_url('http://example.org/test.html'))
+        self.assertTrue(main.is_url('http://example.com'))
+        self.assertTrue(main.is_url('http://example.com/aaa'))
+        self.assertTrue(main.is_url('http://example.com/%aa'))
+        self.assertTrue(main.is_url('http://example.com/ab/ab/aaa.html'))
+        self.assertTrue(main.is_url('http://aaa@example.com/'))
+        self.assertTrue(main.is_url('http://aaa:aa@example.com'))
+        self.assertTrue(main.is_url('http://example.com:80'))
+        self.assertTrue(main.is_url('https://example.com'))
+        self.assertTrue(main.is_url('http://b:a@example.com:8080/t?a=1&b=1+2#42'))
+
     def test_root(self):
         rv = self.app.get('/')
         self.assertEqual(rv.status_code, 200)
