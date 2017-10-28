@@ -16,7 +16,6 @@ db = dbi.dbi(config['db']['uri'], config['db']['name'])
 
 
 def is_url(uri):
-    rc = re.compile(r'^https?://(([^@/])*@)?[a-zA-Z0-9_\.\-]+' /
                     r'(:[0-9]+)?(/[a-zA-Z0-9!#-&(-/:;=?@_]*)?')
     return rc.match(uri)
 
