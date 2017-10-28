@@ -4,3 +4,7 @@ name=testdb
 
 [des]
 key=12345678
+
+[recaptcha]
+use=no
+key=

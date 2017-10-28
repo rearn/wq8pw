@@ -1,9 +1,11 @@
 import base64_32
 import dbi
 import des
-from flask import abort, Flask, redirect, render_template, request, url_for
+from flask import abort, Flask, json, redirect, render_template, request
+from flask import url_for
 from configparser import ConfigParser
 import re
+import urllib.request
 
 
 app = Flask(__name__)
@@ -13,6 +15,8 @@ config.read('wq8pw.ini')
 
 crypt = des.des(config['des']['key'])
 db = dbi.dbi(config['db']['uri'], config['db']['name'])
+use_recaptcha = config['recaptcha'].getboolean('use')
+recaptcha_key = config['recaptcha']['key']
 
 
 def is_url(uri):
@@ -34,6 +38,15 @@ def accept_post():
     if request.method == 'POST':
         uri = request.form['uri']
         redirect_type = 1 if request.form.get('jamp_flag') else 0
+        if (not use_recaptcha):
+            recaptcha_ret = request.form.get('g-recaptcha-response')
+            recaptcha_uri = 'https://www.google.com/recaptcha/api/siteverify' \
+                            '?secret=%s&response=%s' \
+                            % (recaptcha_key, recaptcha_ret)
+            with urllib.request.urlopen(recaptcha_uri) as response:
+                ret = json.loads(response.read())
+            if (not ret['success']):
+                return abort(403)
         num = db.update(uri, redirect_type)
         code = crypt.encode(num)
         base32 = base64_32.base32encode(code)
