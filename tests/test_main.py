@@ -89,6 +89,10 @@ class test_main(unittest.TestCase):
         self.assertRegex(rv.data.decode(), 'https://localhost/4s5yxhl6exkos')
         self.assertRegex(rv.data.decode(), 'https://localhost/5LuLnX4l1Ok')
 
+    def test_update_error_url(self):
+        rv = self.app.post('/accept/post', data={'uri': 'example.com', 'jamp_flag': 1})
+        self.assertEqual(rv.status_code, 400)
+
     def test_update(self):
         rv = self.app.post('/accept/post', data={'uri': 'http://example.net/'})
         self.assertEqual(rv.status_code, 200)
