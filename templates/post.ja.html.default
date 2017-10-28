@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Successful</title>
+</head>
+<body>
+    <header>
+        <h1>生成が成功しました</h1>
+    </header>
+    <section>
+        <p>
+            以下の二つとも同じURLをに移動します。
+        </p>
+        <form>
+            <p>
+                <label>なるべく短いURL: </label>
+                <input type="url" readonly="readonly" value="{{ root.uri11 }}">
+            </p>
+            <p>
+                <label>すべて小文字のURL: </label>
+                <input type="url" readonly="readonly" value="{{ root.uri13 }}">
+            </p>
+        </form>
+    </section>
+</body>
+</html>

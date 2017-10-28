@@ -1,6 +1,17 @@
+CP      = cp
 RUNTEST = ./runtest.py
 MAKE    = make
 COVERAGE= coverage
+
+before_test: config templates_file
+
+config: wq8pw.ini
+
+wq8pw.ini: wq8pw.ini.default
+	$(CP) $< $@
+
+templates_file: templates/Makefile
+	$(MAKE) -C templates all
 
 test:
 	$(RUNTEST)
