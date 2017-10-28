@@ -38,7 +38,7 @@ def accept_post():
     if request.method == 'POST':
         uri = request.form['uri']
         redirect_type = 1 if request.form.get('jamp_flag') else 0
-        if (not use_recaptcha):  # pragma: no cover
+        if use_recaptcha:  # pragma: no cover
             recaptcha_ret = request.form.get('g-recaptcha-response')
             recaptcha_uri = 'https://www.google.com/recaptcha/api/siteverify' \
                             '?secret=%s&response=%s' \
