@@ -90,3 +90,7 @@ def path(base):
             return redirect(uri['uri'], code=301)
         else:
             return render_template('antenna.ja.html', root=uri)
+
+
+if __name__ == '__main__':
+    app.run()
