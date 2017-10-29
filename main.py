@@ -37,8 +37,6 @@ def root():
 def accept_post():
     if request.method == 'POST':
         uri = request.form['uri']
-        if (not is_url(uri)):
-            return abort(400)
         redirect_type = 1 if request.form.get('jamp_flag') else 0
         if use_recaptcha:  # pragma: no cover
             recaptcha_ret = request.form.get('g-recaptcha-response')
@@ -90,3 +88,7 @@ def path(base):
             return redirect(uri['uri'], code=301)
         else:
             return render_template('antenna.ja.html', root=uri)
+
+
+if __name__ == '__main__':
+    app.run()
