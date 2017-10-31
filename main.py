@@ -14,7 +14,8 @@ config = ConfigParser()
 config.read('wq8pw.ini')
 
 crypt = des.des(config['des']['key'])
-db = dbi.dbi(config['db']['uri'], config['db']['name'])
+db_uri = config['db']['uri']
+db_name = config['db']['name']
 use_recaptcha = config['recaptcha'].getboolean('use')
 recaptcha_key = config['recaptcha']['key']
 
@@ -49,6 +50,7 @@ def accept_post():
                 ret = json.loads(response.read())
             if (not ret['success']):
                 return abort(403)
+        db = dbi.dbi(db_uri, db_name)
         num = db.update(uri, redirect_type)
         code = crypt.encode(num)
         base32 = base64_32.base32encode(code)
@@ -75,6 +77,7 @@ def path(base):
     if code is None:
         return abort(404)
     num = crypt.decode(code)
+    db = dbi.dbi(db_uri, db_name)
     uri = db.find_uri(num)
     if uri is None:
         return abort(404)
