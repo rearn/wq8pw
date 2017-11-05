@@ -13,3 +13,6 @@ post.ja.html: post.ja.html.default
 
 antenna.ja.html: antenna.ja.html.default
 	$(CP) $< $@
+
+robots.txt: robots.txt.default
+	$(CP) $< $@

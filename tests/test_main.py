@@ -36,6 +36,11 @@ class test_main(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertRegex(rv.data.decode(), '<h1>短縮URLサービス wq8pw にようこそ</h1>')
 
+    def test_robots(self):
+        rv = self.app.get('/robots.txt')
+        self.assertEqual(rv.status_code, 200)
+        self.assertRegex(rv.data.decode(), 'Disallow: /accept/')
+
     def test_path_redirect_long(self):
         rv = self.app.get('/hv2zlkml76aj2')
         self.assertEqual(rv.status_code, 301)
