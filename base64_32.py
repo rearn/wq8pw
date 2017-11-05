@@ -19,7 +19,11 @@ def base64decode(s):
         s += '='
     else:
         return None
-    return base64.urlsafe_b64decode(s)
+    try:
+        ret = base64.urlsafe_b64decode(s)
+    except binascii.Error:
+        ret = None
+    return ret
 
 
 def base32decode(s):

@@ -21,6 +21,7 @@ class test_des(unittest.TestCase):
         self.assertEqual(base64_32.base64decode('MTE0NTE0NDI'), b'11451442')
         self.assertEqual(base64_32.base64decode('_v7-_v____8'), b'\xfe\xfe\xfe\xfe\xff\xff\xff\xff')
         self.assertIsNone(base64_32.base64decode('12345678'))
+        self.assertIsNone(base64_32.base64decode('favicon.ico'))
 
     def test_base32decode(self):
         self.assertEqual(base64_32.base32decode('ehwnxqnillqoe'), b'!\xec\xdb\xc1\xa8Z\xe0\xe2')
