@@ -34,6 +34,11 @@ def root():
     return render_template('root.ja.html', root=root)
 
 
+@app.route('/robots.txt')
+def robots():
+    return render_template('robots.txt')
+
+
 @app.route('/accept/post', methods=['GET', 'POST'])
 def accept_post():
     if request.method == 'POST':

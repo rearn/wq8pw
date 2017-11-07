@@ -1,7 +1,7 @@
 CP      = cp
 RM      = rm -f
 
-TEMPLATES = root.ja.html post.ja.html antenna.ja.html
+TEMPLATES = root.ja.html post.ja.html antenna.ja.html robots.txt
 
 all: $(TEMPLATES)
 
@@ -12,4 +12,7 @@ post.ja.html: post.ja.html.default
 	$(CP) $< $@
 
 antenna.ja.html: antenna.ja.html.default
+	$(CP) $< $@
+
+robots.txt: robots.txt.default
 	$(CP) $< $@
