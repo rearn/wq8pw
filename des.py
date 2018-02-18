@@ -1,10 +1,10 @@
-from Crypto.Cipher import DES
+import pyDes
 
 
 class des():
     def __init__(self, key):
         if len(key) == 8:
-            self.__des = DES.new(key, DES.MODE_ECB)
+            self.__des = pyDes.des(key, pyDes.ECB)
         else:
             raise Exception()
 
