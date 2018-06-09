@@ -15,8 +15,8 @@ class test_main(unittest.TestCase):
         self.app = main.app.test_client()
 
     def tearDown(self):
-        with MongoClient('mongodb://travis:test@localhost/testdb') as client:
-            client.drop_database('testdb')
+        with MongoClient('mongodb://test:test@localhost/admin') as client:
+            client.drop_database('admin')
 
     def test_is_url(self):
         self.assertTrue(main.is_url('http://example.com/'))

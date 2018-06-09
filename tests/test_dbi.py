@@ -12,11 +12,11 @@ class test_dbi(unittest.TestCase):
             db_uri.insert_one({'id': 1, 'uri': 'http://example.org/test.html', 'type': 1})
             db_cs = db.counters
             db_cs.insert_one({'id': 'uri_id', 'seq': 2})
-        self.db = dbi.dbi('mongodb://travis:test@localhost/testdb', 'testdb')
+        self.db = dbi.dbi('mongodb://test:test@localhost/admin', 'testdb')
 
     def tearDown(self):
-        with MongoClient('mongodb://travis:test@localhost/testdb') as client:
-            client.drop_database('testdb')
+        with MongoClient('mongodb://test:test@localhost/admin') as client:
+            client.drop_database('admin')
 
     def test_find_uri(self):
         self.assertEqual(self.db.find_uri(0), {'uri': 'http://example.com/', 'type': 0})
