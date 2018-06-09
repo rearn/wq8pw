@@ -15,7 +15,7 @@ install:
 services: mongodb
 
 before_script:
-  - mongo testdb --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+  - mongo admin --eval 'db.createUser({user:"test",pwd:"test",roles:["readWrite"]});'
   - make before_test
 
 script:

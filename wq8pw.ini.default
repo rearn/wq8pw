@@ -1,6 +1,6 @@
 [db]
-uri=mongodb://travis:test@localhost/testdb
-name=testdb
+uri=mongodb://test:test@localhost/admin
+name=admin
 
 [des]
 key=12345678

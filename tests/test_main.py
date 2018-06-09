@@ -5,8 +5,8 @@ from pymongo import MongoClient
 
 class test_main(unittest.TestCase):
     def setUp(self):
-        with MongoClient('mongodb://travis:test@localhost/testdb') as client:
-            db = client.testdb
+        with MongoClient('mongodb://test:test@localhost/admin') as client:
+            db = client.admin
             db_uri = db.uri
             db_uri.insert_one({'id': 0, 'uri': 'http://example.com/', 'type': 0})
             db_uri.insert_one({'id': 1, 'uri': 'http://example.org/test.html', 'type': 1})
