@@ -103,3 +103,5 @@ ENV/
 # wq8pw
 wq8pw.ini
 templates/*.html
+templates/robots.txt
+db/

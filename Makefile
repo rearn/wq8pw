@@ -9,6 +9,9 @@ before_test: config templates_file
 
 config: wq8pw.ini
 
+test-config: wq8pw.ini.test
+	$(CP) wq8pw.ini.test wq8pw.ini
+
 wq8pw.ini: wq8pw.ini.default
 	$(CP) $< $@
 

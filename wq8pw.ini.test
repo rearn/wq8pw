@@ -1,5 +1,5 @@
 [db]
-uri=mongodb://test:test@mongo/admin
+uri=mongodb://test:test@localhost/admin
 name=admin
 
 [des]
