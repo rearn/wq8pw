@@ -5,7 +5,7 @@ COVERAGE= coverage
 
 run: docker-up
 
-before_test: config templates_file
+before_test: test-config templates_file
 
 config: wq8pw.ini
 
