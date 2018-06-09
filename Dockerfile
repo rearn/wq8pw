@@ -5,5 +5,4 @@ RUN pip install flask \
                 pymongo
 
 WORKDIR /root
-CMD ["python", "init.py"]
-CMD ["python", "main.py"]
+CMD python init.py && python main.py
