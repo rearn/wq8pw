@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  app:
+    build: "./"
+    volumes:
+      - .:/root/
+    ports:
+      - "5000:5000"
+    links:
+      - 'mongo'
+    depends_on:
+     - mongo
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=test
+    volumes:
+      - ./db:/date/db
