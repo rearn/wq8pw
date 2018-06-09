@@ -12,7 +12,7 @@ class test_dbi(unittest.TestCase):
             db_uri.insert_one({'id': 1, 'uri': 'http://example.org/test.html', 'type': 1})
             db_cs = db.counters
             db_cs.insert_one({'id': 'uri_id', 'seq': 2})
-        self.db = dbi.dbi('mongodb://test:test@localhost/admin', 'testdb')
+        self.db = dbi.dbi('mongodb://travis:test@localhost/admin', 'admin')
 
     def tearDown(self):
         with MongoClient('mongodb://test:test@localhost/admin') as client:
