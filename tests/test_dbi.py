@@ -5,18 +5,18 @@ from pymongo import MongoClient
 
 class test_dbi(unittest.TestCase):
     def setUp(self):
-        with MongoClient('mongodb://test:test@localhost/admin') as client:
-            db = client.admin
+        with MongoClient('mongodb://test:test@localhost/test') as client:
+            db = client.test
             db_uri = db.uri
             db_uri.insert_one({'id': 0, 'uri': 'http://example.com/', 'type': 0})
             db_uri.insert_one({'id': 1, 'uri': 'http://example.org/test.html', 'type': 1})
             db_cs = db.counters
             db_cs.insert_one({'id': 'uri_id', 'seq': 2})
-        self.db = dbi.dbi('mongodb://test:test@localhost/admin', 'admin')
+        self.db = dbi.dbi('mongodb://test:test@localhost/test', 'test')
 
     def tearDown(self):
-        with MongoClient('mongodb://test:test@localhost/admin') as client:
-            client.drop_database('admin')
+        with MongoClient('mongodb://test:test@localhost/test') as client:
+            client.drop_database('test')
 
     def test_find_uri(self):
         self.assertEqual(self.db.find_uri(0), {'uri': 'http://example.com/', 'type': 0})
