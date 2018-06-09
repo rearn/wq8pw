@@ -1,6 +1,6 @@
 [db]
-uri=mongodb://test:test@localhost/admin
-name=admin
+uri=mongodb://test:test@localhost/test
+name=test
 
 [des]
 key=12345678
