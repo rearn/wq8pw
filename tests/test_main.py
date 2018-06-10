@@ -5,8 +5,8 @@ from pymongo import MongoClient
 
 class test_main(unittest.TestCase):
     def setUp(self):
-        with MongoClient('mongodb://travis:test@localhost/testdb') as client:
-            db = client.testdb
+        with MongoClient('mongodb://test:test@localhost/test') as client:
+            db = client.test
             db_uri = db.uri
             db_uri.insert_one({'id': 0, 'uri': 'http://example.com/', 'type': 0})
             db_uri.insert_one({'id': 1, 'uri': 'http://example.org/test.html', 'type': 1})
@@ -15,8 +15,8 @@ class test_main(unittest.TestCase):
         self.app = main.app.test_client()
 
     def tearDown(self):
-        with MongoClient('mongodb://travis:test@localhost/testdb') as client:
-            client.drop_database('testdb')
+        with MongoClient('mongodb://test:test@localhost/test') as client:
+            client.drop_database('test')
 
     def test_is_url(self):
         self.assertTrue(main.is_url('http://example.com/'))

@@ -3,9 +3,14 @@ RUNTEST = ./runtest.py
 MAKE    = make
 COVERAGE= coverage
 
-before_test: config templates_file
+run: docker-up
+
+before_test: test-config templates_file
 
 config: wq8pw.ini
+
+test-config: wq8pw.ini.test
+	$(CP) wq8pw.ini.test wq8pw.ini
 
 wq8pw.ini: wq8pw.ini.default
 	$(CP) $< $@
@@ -30,3 +35,17 @@ coverage-test-v:
 
 coverage-test-q:
 	$(COVERAGE) run $(RUNTEST) quiet
+
+docker-up: docker-build docker-setting
+	sudo docker-compose up
+
+docker-build: docker-setting
+	sudo docker-compose build
+
+docker-rm-mongo:
+	sudo docker-compose rm -fv mongo
+
+docker-setting: config templates_file
+	@if [ ! -d db ]; then \
+		mkdir db; \
+	fi
