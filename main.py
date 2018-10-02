@@ -4,7 +4,7 @@ import des
 from flask import abort, Flask, json, redirect, render_template, request
 from flask import url_for
 from configparser import ConfigParser
-import re
+from urllib.parse import urlparse
 import urllib.request
 
 
@@ -21,9 +21,8 @@ recaptcha_key = config['recaptcha']['key']
 
 
 def is_url(uri):
-    rc = re.compile(r'^https?://(([^@/])*@)?[a-zA-Z0-9_\.\-]+'
-                    r'(:[0-9]+)?(/[a-zA-Z0-9!#-&(-/:;=?@_]*)?')
-    return rc.match(uri)
+    o = urlparse(uri)
+    return len(o.scheme) > 0
 
 
 @app.route('/')
