@@ -2,7 +2,7 @@
   div#app
     div#nav
       router-link(to="/") Home
-      router-link(to="/about") About
+      router-link(to="/master") Master
     router-view
 </template>
 
@@ -22,6 +22,11 @@
     &.router-link-exact-active {
       color: #42b983;
     }
+    padding: 0 10px;
+  }
+  a+a {
+    border-left:1px solid #999;
   }
 }
 </style>
+

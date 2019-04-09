@@ -1,24 +1,18 @@
 import express from 'express';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
 // import socketIO from "socket.io";
+import main from './routes/';
+import apiV1 from './routes/api/v1/';
+import master from './routes/api/v1/master/';
 
 export default (app, http) => {
-  // app.use(express.json());
-  //
-  // app.get('/foo', (req, res) => {
-  //   res.json({msg: 'foo'});
-  // });
-  //
-  // app.post('/bar', (req, res) => {
-  //   res.json(req.body);
-  // });
-  // 
-  // optional support for socket.io
-  // 
-  // let io = socketIO(http);
-  // io.on("connection", client => {
-  //   client.on("message", function(data) {
-  //     // do something
-  //   });
-  //   client.emit("message", "Welcome");
-  // });
-}
+  app.use(express.json());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded());
+  app.use(morgan('combined'));
+
+  app.use('/', main);
+  app.use('/api/v1/', apiV1);
+  app.use('/master/', master);
+};
