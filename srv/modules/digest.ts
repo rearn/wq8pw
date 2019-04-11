@@ -9,15 +9,13 @@ export default (req: express.Request, res: express.Response, next: express.NextF
     const paramsArray: string[] = authHeader.slice(6).trim().split(/\s*,\s*/);
     const paramsKvArray: Array<[string, string]> = paramsArray.map<[string, string]>((value) => {
       const ret = value.split(/\s*=(?:(?=[^"]*"[^"]*")|(?!"))\s*/, 2).map((v2) => {
-        return v2.match(/^"?([^"]*)"?$/)[1];
+        return v2.replace(/^"/, '').replace(/"$/, '');
       });
       return [ret[0], ret[1]];
     });
     const params: Map<string, string> = new Map(paramsKvArray);
     const calams = ['username', 'realm', 'nonce', 'uri', 'cnonce', 'nc', 'qop', 'response', 'opaque'];
-    if (calams.filter((value) => {
-      return ! params.has(value);
-    }).length === 0) {
+    if (calams.filter((value) => ! params.has(value)).length === 0) {
       const algorithm = params.has('algorithm') ? params.get('algorithm') : 'MD5';
       const username = params.get('username');
       const realm = params.get('realm');
@@ -56,7 +54,7 @@ export default (req: express.Request, res: express.Response, next: express.NextF
       }
     }
   }
-  return next();
+
   const rand = () => {
     return Math.floor(Math.random() * 0x100);
   };
@@ -64,14 +62,14 @@ export default (req: express.Request, res: express.Response, next: express.NextF
   const opaque2 = base64.stringify((new Uint8Array(24)).map(rand));
   const v = [
     'Digest realm="http-auth@example.org"',
-    'qop="auth, auth-int"',
+    'qop="auth"',
     'algorithm=SHA-256',
     'nonce="' + nonce2 + '"',
     'opaque="' + opaque2 + '"',
   ];
   const w = [
     'Digest realm="http-auth@example.org"',
-    'qop="auth, auth-int"',
+    'qop="auth',
     'algorithm=MD5',
     'nonce="' + nonce2 + '"',
     'opaque="' + opaque2 + '"',

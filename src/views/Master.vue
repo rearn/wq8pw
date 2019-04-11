@@ -1,7 +1,7 @@
 <template lang="pug">
   div#about
     h1 test
-    p {{ message[0].uri }}
+    p {{ message }}
 </template>
 
 <script lang="ts">
@@ -10,11 +10,11 @@ import Index from '@/components/Index.vue'; // @ is an alias to /src
 
 interface Dlist {
   id: {
-    short: string,
-    logn: string,
-  },
-  uri: string,
-  type: string,
+    short: string;
+    logn: string;
+  };
+  uri: string;
+  type: string;
 }
 
 @Component({
