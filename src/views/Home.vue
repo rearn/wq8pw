@@ -1,6 +1,6 @@
 <template lang="pug">
   div#app
-    Index(v-bind:msg="message" )
+    Header(v-bind:msg="message" )
     section#main
       h2 当サイトについて
       p

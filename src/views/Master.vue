@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Index from '@/components/Index.vue'; // @ is an alias to /src
 
 interface Dlist {
   id: {
