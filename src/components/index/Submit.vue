@@ -1,13 +1,10 @@
 <template lang="pug">
   section#submit
-    p
-      | 以下でURLが生成できます。
-    p
-      | ※サイト閉鎖時にすべてのURL対応表を公開しますので、機密情報は入れないでください。
+    p 以下でURLが生成できます。
+    p ※サイト閉鎖時にすべてのURL対応表を公開しますので、機密情報は入れないでください。
     form(method="post" action="/accept/post" v-on:submit.prevent="warn('aaa', $event)")
-        p
-          label
-            | URL: 
+        p 
+          label URL: 
             input(type="url" name="uri" v-model="uri" required)
         p
           label

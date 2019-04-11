@@ -1,11 +1,13 @@
 <template lang="pug">
+  mixin twitter(username)
+    span Twitter: 
+      a(href="https://twitter.com/" + username) @#{username}
   section#main
     h2 当サイトについて
     p
       |  当サイトは短縮URLサービスです。
       |  なにかありましたら、 
-      span Twitter: 
-        a(href="https://twitter.com/rearn499") @rearn499
+      +twitter("rearn499")
       | に連絡お願いします。
 </template>
 
