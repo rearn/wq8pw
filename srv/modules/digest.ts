@@ -13,19 +13,15 @@ export default (req: express.Request, res: express.Response, next: express.NextF
       });
       return [ret[0], ret[1]];
     });
-    const params: Map<string, string> = new Map(paramsKvArray);
+    const params: {[s: string]: string} = (() => {
+      const t: {[s: string]: string} = {};
+      paramsKvArray.forEach((value) => t[value[0]] = value[1]);
+      return t;
+    })();
     const calams = ['username', 'realm', 'nonce', 'uri', 'cnonce', 'nc', 'qop', 'response', 'opaque'];
-    if (calams.filter((value) => ! params.has(value)).length === 0) {
-      const algorithm = params.has('algorithm') ? params.get('algorithm') : 'MD5';
-      const username = params.get('username');
-      const realm = params.get('realm');
-      const nonce = params.get('nonce');
-      const uri = params.get('uri');
-      const cnonce = params.get('cnonce');
-      const nc = params.get('nc');
-      const qop = params.get('qop');
-      const response = params.get('response');
-      const opaque = params.get('opaque');
+    if (calams.filter((value) => ! (value in params)).length === 0) {
+      const algorithm = params.algorithm || 'MD5';
+      const { username, realm, nonce, uri, cnonce, nc, qop, response, opaque} = params;
 
       const hashFunc = (): crypto.Hash => {
         if (algorithm === 'MD5') {
@@ -55,9 +51,7 @@ export default (req: express.Request, res: express.Response, next: express.NextF
     }
   }
 
-  const rand = () => {
-    return Math.floor(Math.random() * 0x100);
-  };
+  const rand = () => Math.floor(Math.random() * 0x100);
   const nonce2 = base64.stringify((new Uint8Array(24)).map(rand));
   const opaque2 = base64.stringify((new Uint8Array(24)).map(rand));
   const v = [
