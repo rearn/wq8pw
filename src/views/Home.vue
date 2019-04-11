@@ -30,11 +30,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Index from '@/components/Index.vue'; // @ is an alias to /src
+import Header from '@/components/index/Header.vue'; // @ is an alias to /src
 
 @Component({
   components: {
-    Index,
+    Header,
   },
 })
 export default class Home extends Vue {
