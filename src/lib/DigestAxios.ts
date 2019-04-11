@@ -2,9 +2,21 @@ import axios, { AxiosStatic, AxiosRequestConfig } from 'axios';
 import { sha256 } from '@/plugins/js-sha256';
 
 export class DigestAxios {
-  private readonly axios: AxiosStatic;
-  constructor() {
-    this.axios = axios;
+  private username: string;
+  private passwd: string;
+
+  constructor(username: string, passwd: string) {
+    this.username = username;
+    this.passwd = passwd;
+  }
+
+  set info(d: {username: string, passwd: string}) {
+    this.username = d.username;
+    this.passwd = d.passwd;
+  }
+
+  get info() {
+    return {username: this.username, passwd: '***'};
   }
 
   public get(path: string, config?: AxiosRequestConfig) {
@@ -58,8 +70,8 @@ export class DigestAxios {
       throw new Error('Auth params error.');
     }
     const params: {[s: string]: string} = paramsCalamsOk[0];
-    const username: string = 'rearn';
-    const passwd: string = 'aaa';
+    const username: string = this.username;
+    const passwd: string = this.passwd;
     const realm: string = params.realm;
     const nonce: string = params.nonce;
     const uri: string = url;

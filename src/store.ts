@@ -4,7 +4,7 @@ import { DigestAxios } from '@/lib/DigestAxios';
 
 
 Vue.use(Vuex);
-const digestAxios = new DigestAxios();
+const digestAxios = new DigestAxios('rearn', 'aaa');
 
 export default new Vuex.Store({
   state: {
