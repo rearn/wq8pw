@@ -1,4 +1,4 @@
-import axios, { AxiosStatic, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { sha256 } from '@/plugins/js-sha256';
 
 export class DigestAxios {
@@ -44,7 +44,11 @@ export class DigestAxios {
   }
 
   private getWwwAuth(r: any) {
-    return r.response.headers['www-authenticate'];
+    const {status} = r.response;
+    if (status === 401) {
+      return r.response.headers['www-authenticate'];
+    }
+    throw r;
   }
 
   private async getAuthHeader(authHeader: string, method: string, url: string, config?: AxiosRequestConfig) {
@@ -70,15 +74,12 @@ export class DigestAxios {
       throw new Error('Auth params error.');
     }
     const params: {[s: string]: string} = paramsCalamsOk[0];
-    const username: string = this.username;
-    const passwd: string = this.passwd;
-    const realm: string = params.realm;
-    const nonce: string = params.nonce;
+    const { username, passwd } = this;
+    const { realm, nonce, opaque } = params;
     const uri: string = url;
     const cnonce: string = Array(8).map(() => Math.random().toString(36).slice(-8)).join('');
     const nc: string = '0001';
     const qop: string = params.qop.split(/\s*,\s*/).filter((v) => v !== '')[0];
-    const opaque: string = params.opaque;
 
     const hashHex = ((): (str: string) => Promise<string> => {
       if (window.crypto.subtle === undefined) {
