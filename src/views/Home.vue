@@ -14,19 +14,17 @@
         | 以下でURLが生成できます。
       p
         | ※サイト閉鎖時にすべてのURL対応表を公開しますので、機密情報は入れないでください。
-      form(method="post" action="/accept/post")
+      form(method="post" action="/accept/post" v-on:submit.prevent="warn('aaa', $event)")
           p
             label
               | URL: 
-              input(type="url" name="uri" required)
+              input(type="url" name="uri" v-model="uri" required)
           p
             label
-              input(type="checkbox" name="jamp_flag")
+              input(type="checkbox" name="jamp_flag" v-model="jamp_flag")
               | 自動ジャンプせず警告ページを表示する。
           // div(id="g-recaptcha" data-sitekey="6LfEWDYUAAAAAPUPSx6IAIz1NUCCtRHfnEUp8xSY") 
-          // button(type="submit" value="submit") 送信する
-          button(v-on:click="counter += 1") 送信する
-          p {{ counter }}
+          button(type="submit" value="submit") 送信する
 </template>
 
 
@@ -38,14 +36,15 @@ import Index from '@/components/Index.vue'; // @ is an alias to /src
   components: {
     Index,
   },
-  data: {
-    counter: 0,
-  },
-  computed: {
-    message() {
-      return '短縮URLサービス wq8pw にようこそ';
-    },
-  },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  message = '短縮URLサービス wq8pw にようこそ';
+  uri = '';
+  jamp_flag = false;
+  warn(msg: string, event: Event) {
+    const uri: string = this.uri;
+    const jamp_flag = this.jamp_flag;
+    alert([msg, uri, jamp_flag].toString());
+  }
+}
 </script>
