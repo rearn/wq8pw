@@ -14,8 +14,11 @@ const db: Db = store.db;
 router.get('/content', async (req, res) => {
   const b = await db.find({});
   res.json(b.map((value) => {
+    const addId = value.addId  || 0;
     return {
-      id: c.encrypt(new Uint32Array(['addId' in value ? value.addId : 0, value.id])),
+      id: value.id,
+      addId,
+      encrypt: c.encrypt(new Uint32Array([addId, value.id])),
       uri: value.uri,
       type: value.type,
     };

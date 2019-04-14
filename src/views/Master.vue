@@ -1,14 +1,30 @@
 <template lang="pug">
   div#about
     h1 test
-    p {{ message }}
+    table
+      tbody
+        tr
+          th id
+          th short
+          th long
+          th uri
+          th type
+        tr(v-for="item in message")
+          td {{ item.num }}
+          td {{ item.encrypt.short }}
+          td {{ item.encrypt.long }}
+          td {{ item.uri }}
+          td {{ item.type }}
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
 interface Dlist {
-  id: {
+  id: number;
+  addId: number;
+  num: string;
+  encrypt: {
     short: string;
     logn: string;
   };
@@ -19,7 +35,7 @@ interface Dlist {
 @Component({
   computed: {
     message() {
-      const l: Dlist = this.$store.state.List;
+      const l: Dlist[] = this.$store.state.List;
       return this.$store.state.List;
       return 'aaa';
     },

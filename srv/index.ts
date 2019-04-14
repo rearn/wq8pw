@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 // import socketIO from "socket.io";
 import main from './routes/';
 import apiV1 from './routes/api/v1/';
-import master from './routes/api/v1/master/';
+import master from './routes/api/master/v1/';
 
 export default (app, http) => {
   app.use(express.json());
@@ -14,5 +14,5 @@ export default (app, http) => {
 
   app.use('/', main);
   app.use('/api/v1/', apiV1);
-  app.use('/master/', master);
+  app.use('/api/master/v1/', master);
 };

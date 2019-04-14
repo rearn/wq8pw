@@ -11,13 +11,16 @@ export default new Vuex.Store({
     List: '',
   },
   mutations: {
-    setAboutTitle(state, title) {
-      state.List = title;
+    setAboutTitle(state, list) {
+      state.List = list.map((v: any) => {
+        v.num = '0x' + ('0000' +  v.id.toString(16)).substr(-4) + ('0000' + v.addId.toString(16)).substr(-4);
+        return v;
+      });
     },
   },
   actions: {
     async getListAsync({ commit }) {
-      commit('setAboutTitle', await digestAxios.get('/master/content').then((r) => r.data));
+      commit('setAboutTitle', await digestAxios.get('/api/master/v1/content').then((r) => r.data));
     },
   },
 });
