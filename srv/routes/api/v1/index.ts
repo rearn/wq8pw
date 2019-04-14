@@ -14,7 +14,7 @@ router.post('/accept/post', async (req, res) => {
   if (! adjuster.STRING.PATTERN.URI.test(uri)) {
     res.status(400).end();
   }
-  const type: redirectType = ('jamp_flag' in req.body) ? redirectType.antenna : redirectType.redirect;
+  const type: redirectType = req.body.antenna;
 
   const id: Uint32Array = await db.update(uri, type);
   const retUri: UriString = c.encrypt(id);
