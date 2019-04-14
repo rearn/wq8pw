@@ -50,9 +50,9 @@ export class Db {
     const session = await mongoose.startSession();
     try {
       await session.startTransaction();
-      const a = await this.counters.findByIdAndUpdate({id: 'uri_id'}, {$inc: {seq: 1}}).exec();
+      const a = await this.counters.findOneAndUpdate({id: 'uri_id'}, {$inc: {seq: 1}}).exec();
       if (a.seq === 0xffffffff) {
-        const b = await this.counters.findByIdAndUpdate({id: 'uri_add_id'}, {$inc: {seq: 1}}).exec();
+        const b = await this.counters.findOneAndUpdate({id: 'uri_add_id'}, {$inc: {seq: 1}}).exec();
         await this.counters.updateOne({id: 'uri_id'}, {seq: 0}).exec();
         ret[0] = b.seq;
       } else if (a.seq > 0xffffffff) {
@@ -69,7 +69,7 @@ export class Db {
     }
     const id = ret[1];
     const addId = ret[0];
-    await this.counters.insertMany([{id, addId, uri, type}]);
+    await this.uri.insertMany([{id, addId, uri, type}]);
     return ret;
   }
 }

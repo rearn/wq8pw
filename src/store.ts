@@ -13,7 +13,7 @@ export default new Vuex.Store({
   mutations: {
     setAboutTitle(state, list) {
       state.List = list.map((v: any) => {
-        v.num = '0x' + ('0000' +  v.id.toString(16)).substr(-4) + ('0000' + v.addId.toString(16)).substr(-4);
+        v.num = '0x' + ('0000' +  v.addId.toString(16)).substr(-4) + ('0000' + v.id.toString(16)).substr(-4);
         return v;
       });
     },
