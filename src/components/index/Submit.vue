@@ -26,7 +26,7 @@
       // div.g-recaptcha(data-sitekey="6LfEWDYUAAAAAPUPSx6IAIz1NUCCtRHfnEUp8xSY") 
       button(type="submit" value="submit") 送信する
     
-</template>oldaid
+</template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
@@ -45,7 +45,8 @@ export default class Submit extends Vue {
     if (confirm([uri, antenna].toString())) {
       const a = {uri, antenna};
       console.log(a);
-      axios.post('/api/v1/accept/post', a).then((b) => b.data).then((d) => {
+      axios.post('/api/v1/accept/post', a).then((b) => {
+        const d = b.data;
         Object.keys(d).map((v, i) => d[v] = window.location.href + d[v]);
         Object.assign(a, d);
         a.key = this.key;
