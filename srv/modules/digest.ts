@@ -4,7 +4,8 @@ import { passwd } from './store';
 import { base64 } from 'rfc4648';
 
 export default (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  const authHeader: string = req.get('Authorization');
+  const authHeaderu = req.get('Authorization');
+  const authHeader: string = authHeaderu !== undefined ? authHeaderu : '';
   if (authHeader !== undefined && authHeader.slice(0, 6) === 'Digest') {
     const paramsArray: string[] = authHeader.slice(6).trim().split(/\s*,\s*/);
     const paramsKvArray: Array<[string, string]> = paramsArray.map<[string, string]>((value) => {
