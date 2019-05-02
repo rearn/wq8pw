@@ -1,5 +1,5 @@
 /**
- * @test-environment node
+ * @jest-environment node
  */
 
 import request from 'supertest';
