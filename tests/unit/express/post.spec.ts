@@ -60,7 +60,7 @@ describe('GET', () => {
     return request(app).get('/hjgk26lm7v6qg')
       .then((res) => {
         expect(res.status).toBe(200);
-        expect(res.header.location).toBe('http://example.org/test.html');
+        expect(res.text).toMatch('http://example.org/test.html');
       });
   });
   it('path_redirect_short', () => {
@@ -74,7 +74,7 @@ describe('GET', () => {
     return request(app).get('/OkyteWz9fQM')
       .then((res) => {
         expect(res.status).toBe(200);
-        expect(res.header.location).toBe('http://example.org/test.html');
+        expect(res.text).toMatch('http://example.org/test.html');
       });
   });
   it('path_error_uri_none', () => {
