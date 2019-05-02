@@ -19,7 +19,7 @@ export class Des {
     }
     const code: Uint8Array = this.des.encrypt(uint32toUint8(data));
     const short: string = base64url.stringify(code).slice(0, 11);
-    const long: string = base32.stringify(code).slice(0, 13);
+    const long: string = base32.stringify(code).slice(0, 13).toLowerCase();
     return {short, long};
   }
 

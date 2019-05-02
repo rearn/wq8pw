@@ -47,6 +47,47 @@ describe('POST', () => {
   it('400', () => {
     return request(app).post('/api/v1/accept/post').expect(400);
   });
+  it('changeless type', () => {
+    return request(app).post('/api/v1/accept/post')
+      .send({uri: 'http://example.com/', antenna: 0})
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.text).toMatch('hv2zlkml76aj2');
+        expect(res.text).toMatch('PXWVqYv_gJ0');
+    });
+  });
+  it('change type', () => {
+    return request(app).post('/api/v1/accept/post')
+      .send({uri: 'http://example.com/', antenna: 1})
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.text).toMatch('4s5yxhl6exkos');
+        expect(res.text).toMatch('5LuLnX4l1Ok');
+    });
+  });
+  it('error url', () => {
+    return request(app).post('/api/v1/accept/post')
+      .send({uri: 'example.com', antenna: 0})
+      .expect(400);
+  });
+  it('update', () => {
+    return request(app).post('/api/v1/accept/post')
+      .send({uri: 'http://example.net/', antenna: 0})
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.text).toMatch('4s5yxhl6exkos');
+        expect(res.text).toMatch('5LuLnX4l1Ok');
+    });
+  });
+  it('update2', () => {
+    return request(app).post('/api/v1/accept/post')
+      .send({uri: 'http://example.org/test.html', antenna: 1})
+      .then((res) => {
+        expect(res.status).toBe(200);
+        expect(res.text).toMatch('OkyteWz9fQM');
+        expect(res.text).toMatch('hjgk26lm7v6qg');
+    });
+  });
 });
 describe('GET', () => {
   it('path_redirect_long', () => {
