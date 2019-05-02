@@ -15,8 +15,7 @@ router.get('/:id', async (req, res, next) => {
     res.sendStatus(404);
     return next();
   }
-
-  const url: IUriDocument[] = await db.find({id: a[1]});
+  const url: IUriDocument[] = await db.find({addId: a[0], id: a[1]});
   if (url.length === 0) {
     res.sendStatus(404);
     return next();
