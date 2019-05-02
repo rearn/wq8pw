@@ -131,3 +131,28 @@ describe('GET', () => {
     return request(app).get('/1234567890a').expect(404);
   });
 });
+describe('master', () => {
+  it('401', () => {
+    return request(app).get('/api/master/v1/content').expect(401);
+  });
+  it('get', () => {
+    const auth = 'Digest ' +
+    [
+      'username="min"',
+      'realm="http-auth@example.org"',
+      'nonce="zIfyYxm7oe30QPvTy4cYJGZTrg6ZIbGm"',
+      'uri="/api/master/v1/content"',
+      'cnonce="YjNiNGEwZDc3ZWJiYzVlN2EzYTVlMmVlMjZiNDk3MjM="',
+      'nc=00000001',
+      'qop=auth',
+      'response="ec158a399f5d09a950932aa6379028dedf2a82b72dde14efb6e36d22c9236e5a"',
+      'opaque="d6//F+5PvB5czfxLB39NZVDi2MfgnwFy"',
+      'algorithm="SHA-256"',
+    ].join(', ');
+    request(app).get('/api/master/v1/content')
+      .set('Authorization', auth)
+      .then((res) => {
+        expect(res.status).toBe(200);
+      });
+  });
+});
