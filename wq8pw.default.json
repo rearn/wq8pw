@@ -1,0 +1,12 @@
+{
+  "db": {
+    "uri": "mongodb://test:test@mongo/admin",
+    "name": "admin"
+  },
+  "des": {
+    "key": "12345678"
+  },
+  "recaptcha": {
+    "use": false
+  }
+}
