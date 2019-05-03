@@ -1,7 +1,7 @@
 {
   "development": {
     "db": {
-      "uri": "mongodb://test:test@mongo/admin",
+      "uri": "mongodb://test:test@mongo:27017/admin",
       "name": "admin"
     },
     "des": {
@@ -13,8 +13,8 @@
   },
   "test": {
     "db": {
-      "uri": "mongodb://test:test@localhost/test",
-      "name": "test"
+      "uri": "mongodb://test:test@localhost:27017/admin",
+      "name": "admin"
     },
     "des": {
       "key": "12345678"
@@ -24,6 +24,15 @@
     }
   },
   "production": {
-    
+    "db": {
+      "uri": "",
+      "name": ""
+    },
+    "des": {
+      "key": ""
+    },
+    "recaptcha": {
+      "use": false
+    }
   }
 }
