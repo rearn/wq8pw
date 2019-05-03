@@ -1,0 +1,29 @@
+{
+  "development": {
+    "db": {
+      "uri": "mongodb://test:test@mongo/admin",
+      "name": "admin"
+    },
+    "des": {
+      "key": "12345678"
+    },
+    "recaptcha": {
+      "use": false
+    }
+  },
+  "test": {
+    "db": {
+      "uri": "mongodb://test:test@localhost/test",
+      "name": "test"
+    },
+    "des": {
+      "key": "12345678"
+    },
+    "recaptcha": {
+      "use": false
+    }
+  },
+  "production": {
+    
+  }
+}
