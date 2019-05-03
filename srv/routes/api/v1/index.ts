@@ -12,7 +12,7 @@ const db: Db = store.db;
 router.post('/accept/post', async (req, res) => {
   const uri: string = req.body.uri;
   if (! adjuster.STRING.PATTERN.URI.test(uri)) {
-    res.status(400).end();
+    return res.status(400).end();
   }
   const type: redirectType = req.body.antenna;
 

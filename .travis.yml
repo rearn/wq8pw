@@ -1,25 +1,18 @@
 sudo: false
-language: python
-python:
-  - 3.4
-  - 3.5
-  - 3.6
-  - 3.7-dev
-  - pypy3.5-5.8.0
+language: node_js
+node_js:
+  - "11"
+  - "10"
+  - "9"
+  - "8"
 
-install:
-  - pip install tox tox-travis
-  - pip install coverage coveralls
+services: docker
 
-services: mongodb
-
-before_script:
-  - mongo test --eval 'db.createUser({user:"test",pwd:"test",roles:["readWrite"]});'
-  - make before_test
+before_install:
+  - docker run -e MONGO_INITDB_ROOT_USERNAME=test -e MONGO_INITDB_ROOT_PASSWORD=test -d -p 27017:27017 mongo
 
 script:
-  - tox
+  - npm run test:coverage
 
 after_success:
-  - coverage report
-  - coveralls
+  - npm run coveralls

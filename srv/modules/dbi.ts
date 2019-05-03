@@ -1,6 +1,7 @@
 
 import mongoose, { MongooseDocument, Model } from 'mongoose';
 import { error } from 'util';
+import { unwatchFile } from 'fs';
 
 const Schema = mongoose.Schema;
 
@@ -50,15 +51,18 @@ export class Db {
     const session = await mongoose.startSession();
     try {
       await session.startTransaction();
-      const a = await this.counters.findOneAndUpdate({id: 'uri_id'}, {$inc: {seq: 1}}).exec();
+      const an = await this.counters.findOneAndUpdate({id: 'uri_id'}, {$inc: {seq: 1}}).exec();
+      const a = an !== null ? an : {seq: -0.1};
       if (a.seq === 0xffffffff) {
-        const b = await this.counters.findOneAndUpdate({id: 'uri_add_id'}, {$inc: {seq: 1}}).exec();
+        const bn = await this.counters.findOneAndUpdate({id: 'uri_add_id'}, {$inc: {seq: 1}}).exec();
+        const b = bn !== null ? bn : {seq: -0.1};
         await this.counters.updateOne({id: 'uri_id'}, {seq: 0}).exec();
         ret[0] = b.seq;
       } else if (a.seq > 0xffffffff) {
         throw new Error();
       } else {
-        const b = await this.counters.findOne({id: 'uri_add_id'}).exec();
+        const bn = await this.counters.findOne({id: 'uri_add_id'}).exec();
+        const b = bn !== null ? bn : {seq: -0.1};
         ret[0] = b.seq;
       }
       ret[1] = a.seq;
