@@ -10,7 +10,8 @@
     "express:run": "vue-cli-service express:run",
     "test:unit": "vue-cli-service test:unit",
     "test:coverage": "vue-cli-service test:unit --coverage",
-    "codecov": "codecov"
+    "codecov": "codecov",
+    "makeComfig": "cp config.default.json config.json"
   },
   "dependencies": {
     "adjuster": "^1.3.1",
