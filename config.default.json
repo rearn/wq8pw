@@ -9,6 +9,18 @@
     },
     "recaptcha": {
       "use": false
+    },
+    "master": {
+      "auth": [
+        {
+          "user": "rearn",
+          "pass": "aaa"
+        },
+        {
+          "user": "min",
+          "pass": "ccc"
+        }
+      ]
     }
   },
   "test": {
@@ -21,6 +33,14 @@
     },
     "recaptcha": {
       "use": false
+    },
+    "master": {
+      "auth": [
+        {
+          "user": "min",
+          "pass": "ccc"
+        }
+      ]
     }
   },
   "production": {
@@ -33,6 +53,14 @@
     },
     "recaptcha": {
       "use": false
+    },
+    "master": {
+      "auth": [
+        {
+          "user": "",
+          "pass": ""
+        }
+      ]
     }
   }
 }
