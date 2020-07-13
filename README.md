@@ -9,7 +9,7 @@ The simple URI Shortener application.
 ## Description
 
 This application is URI Shortener application,  executed on wq8.pw (coming soon.)
-It is made by Flask + mongodb.
+It is made by nodejs + vue.js + express + mariadb.
 
 ## Licence
 
