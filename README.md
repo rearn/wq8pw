@@ -1,7 +1,7 @@
 # wq8pw
 
 [![Build Status](https://travis-ci.org/rearn/wq8pw.svg?branch=master)](https://travis-ci.org/rearn/wq8pw)
-[![Coverage Status](https://coveralls.io/repos/github/rearn/wq8pw/badge.svg?branch=master)](https://coveralls.io/github/rearn/wq8pw?branch=master)
+[![codecov](https://codecov.io/gh/rearn/wq8pw/branch/master/graph/badge.svg)](https://codecov.io/gh/rearn/wq8pw/)
 [![License-AGPL](https://img.shields.io/badge/license-AGPL-blue.svg)](LICENSE)
 
 The simple URI Shortener application.

@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "serve:docker": "concurrently npm:serve npm:express",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "express": "vue-cli-service express:watch",
     "express:run": "vue-cli-service express:run",
     "test:unit": "vue-cli-service test:unit",
     "test:coverage": "vue-cli-service test:unit --coverage",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "codecov": "codecov",
+    "make:config": "cp config.default.json config.json"
   },
   "dependencies": {
     "adjuster": "^1.3.1",
@@ -40,7 +42,8 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.16.0",
-    "coveralls": "^3.0.3",
+    "codecov": "^3.3.0",
+    "concurrently": "^4.1.0",
     "fibers": "^3.1.1",
     "request": "^2.88.0",
     "sass": "^1.17.2",

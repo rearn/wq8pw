@@ -1,0 +1,66 @@
+{
+  "development": {
+    "db": {
+      "uri": "mongodb://test:test@mongo:27017/admin",
+      "name": "admin"
+    },
+    "des": {
+      "key": "12345678"
+    },
+    "recaptcha": {
+      "use": false
+    },
+    "master": {
+      "auth": [
+        {
+          "user": "rearn",
+          "pass": "aaa"
+        },
+        {
+          "user": "min",
+          "pass": "ccc"
+        }
+      ]
+    }
+  },
+  "test": {
+    "db": {
+      "uri": "mongodb://test:test@localhost:27017/admin",
+      "name": "admin"
+    },
+    "des": {
+      "key": "12345678"
+    },
+    "recaptcha": {
+      "use": false
+    },
+    "master": {
+      "auth": [
+        {
+          "user": "min",
+          "pass": "ccc"
+        }
+      ]
+    }
+  },
+  "production": {
+    "db": {
+      "uri": "",
+      "name": ""
+    },
+    "des": {
+      "key": ""
+    },
+    "recaptcha": {
+      "use": false
+    },
+    "master": {
+      "auth": [
+        {
+          "user": "",
+          "pass": ""
+        }
+      ]
+    }
+  }
+}

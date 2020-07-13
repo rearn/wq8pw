@@ -149,7 +149,7 @@ describe('master', () => {
       'opaque="d6//F+5PvB5czfxLB39NZVDi2MfgnwFy"',
       'algorithm="SHA-256"',
     ].join(', ');
-    request(app).get('/api/master/v1/content')
+    return request(app).get('/api/master/v1/content')
       .set('Authorization', auth)
       .then((res) => {
         expect(res.status).toBe(200);
