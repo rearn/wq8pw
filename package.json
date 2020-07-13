@@ -23,6 +23,7 @@
     "rfc4648": "^1.4.0",
     "simple-des-crypto": "0.0.1",
     "type-array-convert": "0.0.1",
+    "typeorm": "^0.2.25",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.0.0",
