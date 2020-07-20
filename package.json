@@ -20,6 +20,7 @@
     "body-parser": "^1.19.0",
     "mongoose": "^5.9.23",
     "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
     "rfc4648": "^1.4.0",
     "simple-des-crypto": "0.0.1",
     "type-array-convert": "0.0.1",
