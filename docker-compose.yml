@@ -8,14 +8,16 @@ services:
     ports:
       - "8080:8080"
     links:
-      - 'mongo'
+      - 'maria'
     depends_on:
-     - mongo
-  mongo:
-    image: mongo
+     - maria
+  maria:
+    image: mariadb
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=test
-      - MONGO_INITDB_ROOT_PASSWORD=test
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
     volumes:
-      - ./db:/date/db
+      - ./db:/var/lib/mysql

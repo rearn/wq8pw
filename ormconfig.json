@@ -1,0 +1,24 @@
+{
+  "type": "mariadb",
+  "host": "maria",
+  "port": 3306,
+  "username": "audio",
+  "password": "wq8pw",
+  "database": "wq8pw",
+  "synchronize": false,
+  "logging": true,
+  "entities": [
+    "srv/entity/**/*.ts"
+  ],
+  "migrations": [
+    "srv/migration/**/*.ts"
+  ],
+  "subscribers": [
+    "srv/subscriber/**/*.ts"
+  ],
+  "cli": {
+    "entitiesDir": "srv/entity",
+    "migrationsDir": "srv/migration",
+    "subscribersDir": "srv/subscriber"
+  }
+}
