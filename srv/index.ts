@@ -17,5 +17,5 @@ export default (app: any, http: any) => {
 
   app.use('/', main);
   app.use('/api/v1/', apiV1);
-  app.use('/api/master/v1/', master);
+//  app.use('/api/master/v1/', master);
 };

@@ -1,6 +1,6 @@
 import express from 'express';
 import { Des } from '../../../../modules/des';
-import { Db } from '../../../../modules/dbi';
+import { findAll, stringint2uint } from '../../../../modules/dbi';
 import * as store from '../../../../modules/store';
 import digest from '../../../../modules/digest';
 const router = express.Router();
@@ -8,19 +8,16 @@ const router = express.Router();
 router.use(digest);
 
 const c: Des = store.c;
-const db: Db = store.db;
 
 
 router.get('/content', async (req, res) => {
-  const b = await db.find({});
+  const b = await findAll();
   res.json(b.map((value) => {
-    const addId = value.addId  || 0;
     return {
       id: value.id,
-      addId,
-      encrypt: c.encrypt(new Uint32Array([addId, value.id])),
+      encrypt: c.encrypt(stringint2uint(value.id)),
       uri: value.uri,
-      type: value.type,
+      type: value.antenna,
     };
   }));
 });

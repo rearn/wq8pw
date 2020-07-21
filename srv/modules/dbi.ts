@@ -1,10 +1,25 @@
 import { getRepository } from 'typeorm';
 import { Wq8pw } from 'srv/entity/Wq8pw';
 
-export const findUri = async (id: number) => {
+
+const uint2stringint = (v: Uint32Array) => {
+  const u = BigInt(v[0]);
+  const l = BigInt(v[1]);
+  const m = BigInt(0x100000000);
+  const a = u * m + l;
+  return a.toString();
+};
+
+export const findAll = async () => {
+  const wq8pwRepositry = getRepository(Wq8pw);
+  const idList = await wq8pwRepositry.find({});
+  return idList;
+};
+
+export const findUri = async (id: Uint32Array) => {
   const wq8pwRepositry = getRepository(Wq8pw);
   const idList = await wq8pwRepositry.findOne({
-    where: { id },
+    where: { id: uint2stringint(id) },
   });
   return idList;
 };
@@ -18,9 +33,9 @@ export const findId = async (uri: string, antenna: boolean) => {
   return idList;
 };
 
-const stringint2uint = (v: string) => {
+export const stringint2uint = (v: string) => {
   const a = BigInt(v);
-  const m = BigInt(0xffffffff);
+  const m = BigInt(0x100000000);
   return new Uint32Array([Number(a / m), Number(a % m)]);
 };
 
