@@ -1,16 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, PrimaryColumn, Generated, BaseEntity } from 'typeorm';
 
 @Entity()
-export class Wq8pw {
-  @PrimaryGeneratedColumn()
-  public id: number;
+export class Wq8pw extends BaseEntity {
+  @Generated('increment')
+  @PrimaryColumn('bigint', { unsigned: true })
+  public id!: string;
 
-  @Column('int', { nullable: false })
-  public addId: number;
+  @Column('varchar', { length: 1024, nullable: false })
+  public uri: string = '';
 
-  @Column('varchar', { length: 1024 })
-  public uri: string;
-
-  @Column('boolean')
-  public antenna: boolean;
+  @Column('boolean', { nullable: false })
+  public antenna: boolean = false;
 }
