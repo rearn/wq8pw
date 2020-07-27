@@ -7,15 +7,18 @@ node_js:
   - "8"
 
 env:
-  - MONGO_VERSION=4.1
-  - MONGO_VERSION=4.0
-  - MONGO_VERSION=latest
-  - MONGO_VERSION=unstable
-  
+  - MARIA_VERSION=10.5
+  - MARIA_VERSION=10.4
+  - MARIA_VERSION=10.3
+  - MARIA_VERSION=10.2
+  - MARIA_VERSION=10.1
+  - MARIA_VERSION=10
+  - MARIA_VERSION=latest
+
 services: docker
 
 before_install:
-  - docker run -e MONGO_INITDB_ROOT_USERNAME=test -e MONGO_INITDB_ROOT_PASSWORD=test -d -p 27017:27017 mongo:${MONGO_VERSION}
+  - docker run -e MYSQL_USER=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=test_database -d -p 3306:3306 mariadb:${MARIA_VERSION}
 
 before_script:
   - npm run make:config
