@@ -11,11 +11,6 @@ node_js:
 
 env:
   - MARIA_VERSION=10.5
-  - MARIA_VERSION=10.4
-  - MARIA_VERSION=10.3
-  - MARIA_VERSION=10.2
-  - MARIA_VERSION=10.1
-  - MARIA_VERSION=10
   - MARIA_VERSION=latest
 
 services: docker
