@@ -4,44 +4,27 @@
 
 import request from 'supertest';
 import app from '../../../srv/test';
-import mongoose from 'mongoose';
+import { beginConnection, closeConnection } from 'srv/dbConnection';
 
-const removeCollection = () => {
-  const connection = mongoose.connection;
-  const collections = connection.collections;
-  const removeList = [];
-  for (const i in collections) {
-    if (collections.hasOwnProperty(i)) {
-      removeList.push(collections[i].deleteMany({}));
-    }
-  }
-  return Promise.all(removeList);
+const tableSetUp = async () => {
+  const connection = await beginConnection();
+  await connection.query('CREATE TABLE `wq8pw` (`id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, `uri` varchar(1024) NOT NULL, `antenna` tinyint NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB');
+  await connection.query('INSERT INTO `wq8pw` VALUES (0, `http://example.com/`, false)');
+  await connection.query('INSERT INTO `wq8pw` VALUES (1, `http://example.org/test.html`, true)');
+  await closeConnection();
 };
 
-beforeAll(removeCollection);
+const tebleReset = async () => {
+  const connection = await beginConnection();
+  await connection.query('DROP TABLE `wq8pw`');
+  await closeConnection();
+};
 
-beforeEach(async () => {
-  const connection = mongoose.connection;
-  const collections = connection.collections;
-  const uri = connection.createCollection('test');
-  const counters = connection.createCollection('counters');
-  await Promise.all([uri, counters]);
-  const uriInsert = collections.test.insertMany([
-    {id: 0, addId: 0, uri: 'http://example.com/', type: 0},
-    {id: 1, addId: 0, uri: 'http://example.org/test.html', type: 1},
-  ]);
-  const countersInsert = collections.counters.insertMany([
-    {id: 'uri_id', seq: 2},
-    {id: 'uri_add_id', seq: 0},
-  ]);
-  return Promise.all([uriInsert, countersInsert]);
-});
+beforeAll(tebleReset);
 
-afterEach(removeCollection);
+beforeEach(tableSetUp);
 
-afterAll(async () => {
-  await mongoose.connection.close();
-});
+afterEach(tebleReset);
 
 describe('POST', () => {
   it('400', () => {
