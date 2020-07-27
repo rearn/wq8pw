@@ -2,9 +2,9 @@
   "type": "mariadb",
   "host": "maria",
   "port": 3306,
-  "username": "audio",
-  "password": "wq8pw",
-  "database": "wq8pw",
+  "username": "docker",
+  "password": "docker",
+  "database": "test_database",
   "synchronize": false,
   "logging": true,
   "entities": [
