@@ -1,5 +1,6 @@
 # wq8pw
 config.json
+ormconfig.json
 templates/*.html
 templates/robots.txt
 db/
