@@ -3,6 +3,7 @@
  */
 import { createConnection, getConnectionOptions, Connection } from 'typeorm';
 import { logger, TypeOrmWinstonLogger } from './logger';
+import { env } from './modules/store';
 
 let connection: Connection|null = null;
 
@@ -11,7 +12,7 @@ let connection: Connection|null = null;
  */
 export const beginConnection = async () => {
   if (connection === null) {
-    const v = await getConnectionOptions();
+    const v = await getConnectionOptions(env);
     connection = await createConnection(
       Object.assign(v, {
         logger: new TypeOrmWinstonLogger(true),

@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import { Wq8pw } from 'srv/entity/Wq8pw';
+import { Wq8pw } from '../entity/Wq8pw';
 
 
 const uint2stringint = (v: Uint32Array) => {

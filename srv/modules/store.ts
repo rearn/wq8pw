@@ -21,7 +21,7 @@ interface Iconfig {
   };
 }
 
-const env = process.env.NODE_ENV as string;
+export const env = process.env.NODE_ENV as string;
 const config = (allConfig as Iconfig)[env];
 export const c: Des =  new Des(new Uint8Array(
   config.des.key.split('').map((v) => v.charCodeAt(0)),

@@ -1,24 +1,77 @@
-{
-  "type": "mariadb",
-  "host": "maria",
-  "port": 3306,
-  "username": "docker",
-  "password": "docker",
-  "database": "test_database",
-  "synchronize": false,
-  "logging": true,
-  "entities": [
-    "srv/entity/**/*.ts"
-  ],
-  "migrations": [
-    "srv/migration/**/*.ts"
-  ],
-  "subscribers": [
-    "srv/subscriber/**/*.ts"
-  ],
-  "cli": {
-    "entitiesDir": "srv/entity",
-    "migrationsDir": "srv/migration",
-    "subscribersDir": "srv/subscriber"
+[
+  {
+    "name": "development",
+    "type": "mariadb",
+    "host": "maria",
+    "port": 3306,
+    "username": "docker",
+    "password": "docker",
+    "database": "test_database",
+    "synchronize": false,
+    "logging": true,
+    "entities": [
+      "srv/entity/**/*.ts"
+    ],
+    "migrations": [
+      "srv/migration/**/*.ts"
+    ],
+    "subscribers": [
+      "srv/subscriber/**/*.ts"
+    ],
+    "cli": {
+      "entitiesDir": "srv/entity",
+      "migrationsDir": "srv/migration",
+      "subscribersDir": "srv/subscriber"
+    }
+  },
+  {
+    "name": "test",
+    "type": "mariadb",
+    "host": "localhost",
+    "port": 3306,
+    "username": "test",
+    "password": "test",
+    "database": "test_database",
+    "synchronize": false,
+    "logging": true,
+    "entities": [
+      "srv/entity/**/*.ts"
+    ],
+    "migrations": [
+      "srv/migration/**/*.ts"
+    ],
+    "subscribers": [
+      "srv/subscriber/**/*.ts"
+    ],
+    "cli": {
+      "entitiesDir": "srv/entity",
+      "migrationsDir": "srv/migration",
+      "subscribersDir": "srv/subscriber"
+    }
+  },
+  {
+    "name": "production",
+    "type": "mariadb",
+    "host": "maria",
+    "port": 3306,
+    "username": "",
+    "password": "",
+    "database": "",
+    "synchronize": false,
+    "logging": true,
+    "entities": [
+      "srv/entity/**/*.ts"
+    ],
+    "migrations": [
+      "srv/migration/**/*.ts"
+    ],
+    "subscribers": [
+      "srv/subscriber/**/*.ts"
+    ],
+    "cli": {
+      "entitiesDir": "srv/entity",
+      "migrationsDir": "srv/migration",
+      "subscribersDir": "srv/subscriber"
+    }
   }
-}
+]
