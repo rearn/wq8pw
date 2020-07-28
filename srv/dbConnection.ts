@@ -1,7 +1,7 @@
 /**
  * @file DB 関連の関数群
  */
-import { createConnection, getConnectionOptions, Connection } from 'typeorm';
+import { getConnectionOptions, Connection, getConnectionManager } from 'typeorm';
 import { logger, TypeOrmWinstonLogger } from './logger';
 import { env } from './modules/store';
 
@@ -13,11 +13,11 @@ let connection: Connection|null = null;
 export const beginConnection = async () => {
   if (connection === null) {
     const v = await getConnectionOptions(env);
-    connection = await createConnection(
+    connection = await getConnectionManager().create(
       Object.assign(v, {
         logger: new TypeOrmWinstonLogger(true),
       }),
-    );
+    ).connect();
     logger.info('Connection DB');
   }
   return connection;
