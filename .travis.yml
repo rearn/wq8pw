@@ -17,7 +17,7 @@ services: docker
 
 before_install:
   - sudo /etc/init.d/mysql stop
-  - docker run -e MYSQL_USER=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=test_database -d -p 3306:3306 mariadb:${MARIA_VERSION}
+  - docker run -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=test_database -d -p 3306:3306 mariadb:${MARIA_VERSION}
 
 before_script:
   - npm run make:config
