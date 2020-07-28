@@ -32,20 +32,20 @@ describe('POST', () => {
   });
   it('changeless type', () => {
     return request(app).post('/api/v1/accept/post')
-      .send({uri: 'http://example.com/', antenna: 0})
+      .send({uri: 'http://example.com/', antenna: false})
       .then((res) => {
         expect(res.status).toBe(200);
-        expect(res.text).toMatch('4s5yxhl6exkos');
-        expect(res.text).toMatch('5LuLnX4l1Ok');
+        expect(res.text).toMatch('hjgk26lm7v6qg');
+        expect(res.text).toMatch('OkyteWz9fQM');
     });
   });
   it('change type', () => {
     return request(app).post('/api/v1/accept/post')
-      .send({uri: 'http://example.com/', antenna: 1})
+      .send({uri: 'http://example.com/', antenna: true})
       .then((res) => {
         expect(res.status).toBe(200);
-        expect(res.text).toMatch('4s5yxhl6exkos');
-        expect(res.text).toMatch('5LuLnX4l1Ok');
+        expect(res.text).toMatch('fy5jyuop4wize');
+        expect(res.text).toMatch('LjqcUc_lkZI');
     });
   });
   it('error url', () => {
@@ -58,8 +58,8 @@ describe('POST', () => {
       .send({uri: 'http://example.net/', antenna: 0})
       .then((res) => {
         expect(res.status).toBe(200);
-        expect(res.text).toMatch('4s5yxhl6exkos');
-        expect(res.text).toMatch('5LuLnX4l1Ok');
+        expect(res.text).toMatch('fy5jyuop4wize');
+        expect(res.text).toMatch('LjqcUc_lkZI');
     });
   });
   it('update2', () => {
@@ -67,42 +67,42 @@ describe('POST', () => {
       .send({uri: 'http://example.org/test.html', antenna: 1})
       .then((res) => {
         expect(res.status).toBe(200);
-        expect(res.text).toMatch('OkyteWz9fQM');
-        expect(res.text).toMatch('hjgk26lm7v6qg');
+        expect(res.text).toMatch('4s5yxhl6exkos');
+        expect(res.text).toMatch('5LuLnX4l1Ok');
     });
   });
 });
 describe('GET', () => {
   it('path_redirect_long', () => {
-    return request(app).get('/hv2zlkml76aj2')
+    return request(app).get('/hjgk26lm7v6qg')
       .then((res) => {
         expect(res.status).toBe(301);
         expect(res.header.location).toBe('http://example.com/');
       });
   });
   it('path_antenna_long', () => {
-    return request(app).get('/hjgk26lm7v6qg')
+    return request(app).get('/4s5yxhl6exkos')
       .then((res) => {
         expect(res.status).toBe(200);
         expect(res.text).toMatch('http://example.org/test.html');
       });
   });
   it('path_redirect_short', () => {
-    return request(app).get('/PXWVqYv_gJ0')
+    return request(app).get('/OkyteWz9fQM')
       .then((res) => {
         expect(res.status).toBe(301);
         expect(res.header.location).toBe('http://example.com/');
       });
   });
   it('path_antenna_short', () => {
-    return request(app).get('/OkyteWz9fQM')
+    return request(app).get('/5LuLnX4l1Ok')
       .then((res) => {
         expect(res.status).toBe(200);
         expect(res.text).toMatch('http://example.org/test.html');
       });
   });
   it('path_error_uri_none', () => {
-    return request(app).get('/5LuLnX4l1Ok').expect(404);
+    return request(app).get('/LjqcUc_lkZI').expect(404);
   });
   it('path_error_different_path', () => {
     return request(app).get('/1234567890ab').expect(404);
