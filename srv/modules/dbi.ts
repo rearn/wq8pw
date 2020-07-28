@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 import { Wq8pw } from '../entity/Wq8pw';
-import { beginConnection } from 'srv/dbConnection';
+import { beginConnection } from '../dbConnection';
 
 const uint2stringint = (v: Uint32Array) => {
   const u = BigInt(v[0]);
