@@ -18,7 +18,7 @@ before_install:
 
 before_script:
   - npm run make:config
-  - sleep 5 && npm run migration:run -- -c test -t test
+  - sleep 10 && npm run migration:run -- -c test -t test
 
 script:
   - npm run test:coverage
