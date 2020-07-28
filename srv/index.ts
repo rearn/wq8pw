@@ -4,7 +4,6 @@ import bodyParser from 'body-parser';
 import main from './routes/';
 import apiV1 from './routes/api/v1/';
 import master from './routes/api/master/v1/';
-import { beginConnection } from './dbConnection';
 import { httpLogger } from './logger';
 
 export default (app: any, http: any) => {
