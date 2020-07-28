@@ -1,84 +1,93 @@
+import { getRepository, BaseEntity } from 'typeorm';
+import { Wq8pw } from '../entity/Wq8pw';
+import { beginConnection } from '../dbConnection';
+import { env } from './store';
 
-import mongoose, { MongooseDocument, Model } from 'mongoose';
-import { error } from 'util';
-import { unwatchFile } from 'fs';
-
-const Schema = mongoose.Schema;
-
-export enum redirectType {
-  redirect = 0,
-  antenna = 1,
-}
-export interface IUriDocument extends mongoose.Document {
-  id: number;
-  addId: number;
-  uri: string;
-  type: redirectType;
-}
-interface ICounters extends mongoose.Document {
-  id: string;
-  seq: number;
-}
-
-export class Db {
-  private uri: Model<IUriDocument, {}>;
-  private counters: Model<ICounters, {}>;
-  private readonly test: mongoose.Schema = new Schema({
-    id: Number,
-    addId: Number,
-    uri: String,
-    type: Number,
-  }, {collection: 'test'});
-  private readonly countersSchema: mongoose.Schema = new Schema({
-    id: String,
-    seq: Number,
-  }, {collection: 'counters'});
-
-  constructor(uri: string) {
-    mongoose.connect(uri, {useNewUrlParser: true});
-    this.uri = mongoose.model<IUriDocument>('test', this.test);
-    this.counters = mongoose.model<ICounters>('counters', this.countersSchema);
+const uint2stringint = (v: Uint32Array) => {
+  if (v[0] === 0) {
+    return v[1].toString();
   }
-  public find = async (param: object): Promise<IUriDocument[]> => {
-    return await this.uri.find(param).exec();
+  const n = 0x10000;
+  const m = 10000000000;
+
+  const u = Math.floor(v[0] / n);
+  const l = v[0] - u * n;
+  const ll =  l * n * n + v[1];
+  if (u === 0) {
+    return ll.toString();
   }
-  public update = async (uri: string, type: redirectType): Promise<Uint32Array> => {
-    const find = await this.find({uri, type});
-    if (find.length >= 1) {
-      return new Uint32Array([find[0].addId, find[0].id]);
+  const a = u * n * n;
+  const b = Math.floor(a / m);
+  const c = a - b * m;
+  const cnll = c * n + ll;
+  const cnllD = Math.floor(cnll / m);
+  const cnllM = cnll - cnllD * m;
+  const uStr = (b * n + cnllD).toString();
+  const lStr = cnllM.toString().padStart(m.toString().length - 1, '0');
+  return uStr.concat(lStr);
+};
+
+export const findAll = async () => {
+  const conn = await beginConnection();
+  const wq8pwRepositry = getRepository(Wq8pw, env);
+  const idList = await wq8pwRepositry.find({});
+  return idList;
+};
+
+export const findUri = async (id: Uint32Array) => {
+  const conn = await beginConnection();
+  const wq8pwRepositry = getRepository(Wq8pw, env);
+  const idList = await wq8pwRepositry.findOne({
+    where: { id: uint2stringint(id) },
+  });
+  return idList;
+};
+
+export const findId = async (uri: string, antenna: boolean) => {
+  const conn = await beginConnection();
+  const wq8pwRepositry = getRepository(Wq8pw, env);
+  const idList = await wq8pwRepositry.findOne({
+    select: ['id'],
+    where: { uri, antenna },
+  });
+  return idList;
+};
+
+export const stringint2uint = (v: string) => {
+  if (v.length >= 10) {
+    const a = parseInt(v.slice(0, 10), 10);
+    // tslint:disable-next-line:no-shadowed-variable
+    const b = v.slice(10).split('').map((v) => parseInt(v, 10));
+    let c = Math.floor(a / 0xffffffff);
+    let d = a - c * 0xffffffff;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < b.length; i++) {
+      d += b[i] * 10;
+      const e = Math.floor(d / 0xffffffff);
+      d -= e * 0xffffffff;
+      c = c * 10 + e;
     }
-    const ret = new Uint32Array(2);
-    const session = await mongoose.startSession();
-    try {
-      await session.startTransaction();
-      const an = await this.counters.findOneAndUpdate({id: 'uri_id'}, {$inc: {seq: 1}}).exec();
-      const a = an !== null ? an : {seq: -0.1};
-      if (a.seq === 0xffffffff) {
-        const bn = await this.counters.findOneAndUpdate({id: 'uri_add_id'}, {$inc: {seq: 1}}).exec();
-        const b = bn !== null ? bn : {seq: -0.1};
-        await this.counters.updateOne({id: 'uri_id'}, {seq: 0}).exec();
-        ret[0] = b.seq;
-      } else if (a.seq > 0xffffffff) {
-        throw new Error();
-      } else {
-        const bn = await this.counters.findOne({id: 'uri_add_id'}).exec();
-        const b = bn !== null ? bn : {seq: -0.1};
-        ret[0] = b.seq;
-      }
-      ret[1] = a.seq;
-    } catch (err) {
-      await session.abortTransaction();
-    } finally {
-      await session.endSession();
-    }
-    const id = ret[1];
-    const addId = ret[0];
-    await this.uri.insertMany([{id, addId, uri, type}]);
-    return ret;
+    return new Uint32Array([c, d]);
   }
-}
+  return new Uint32Array([0, parseInt(v, 10)]);
+};
 
-
-
-
+export const update = async (uri: string, antenna: boolean) => {
+  const conn = await beginConnection();
+  const find = await findId(uri, antenna);
+  if (find !== undefined) {
+    return stringint2uint(find.id);
+  }
+  // const wq8pwRepositry = getRepository(Wq8pw);
+  const a = new Wq8pw();
+  a.uri = uri;
+  a.antenna = antenna;
+  BaseEntity.useConnection(conn);
+  await a.save();
+  const find2 = await findId(uri, antenna);
+  if (find2 !== undefined) {
+    return stringint2uint(find2.id);
+  }
+  throw new Error('ありえないはず');
+};
 

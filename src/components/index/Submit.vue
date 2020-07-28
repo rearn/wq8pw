@@ -35,33 +35,33 @@ import axios from 'axios';
 @Component
 export default class Submit extends Vue {
   @Prop() private msg!: string;
-  uri = '';
-  antenna = false;
-  message = Array();
-  key = 0;
-  send() {
+  private uri = '';
+  private antenna = false;
+  private message = Array();
+  private key = 0;
+  public send() {
     const uri: string = this.uri;
     const antenna = this.antenna;
     if (confirm([uri, antenna].toString())) {
-      const a = {uri, antenna};
+      const a: { uri: string; antenna: boolean; key?: number } = {uri, antenna};
       console.log(a);
       axios.post('/api/v1/accept/post', a).then((b) => {
         const d = b.data;
         Object.keys(d).map((v, i) => d[v] = window.location.href + d[v]);
         Object.assign(a, d);
         a.key = this.key;
-        this.key +=1;
+        this.key += 1;
         this.message.push(a);
         console.log(this.message);
       });
     }
   }
-  copy(element: HTMLInputElement) {
+  public copy(element: HTMLInputElement) {
     element.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     alert('コピーしました。');
   }
-  del(index: number) {
+  public del(index: number) {
     console.log(index);
     this.message.splice(index, 1);
   }

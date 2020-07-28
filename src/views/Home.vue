@@ -21,6 +21,6 @@ import Submit from '@/components/index/Submit.vue';
   },
 })
 export default class Home extends Vue {
-  message = '短縮URLサービス wq8pw にようこそ';
+  public message = '短縮URLサービス wq8pw にようこそ';
 }
 </script>

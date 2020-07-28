@@ -5,10 +5,12 @@
   ],
   "linterOptions": {
     "exclude": [
-      "node_modules/**"
+      "node_modules/**",
+      "**/*.json"
     ]
   },
   "rules": {
+    "no-console": false,
     "quotemark": [true, "single"],
     "indent": [true, "spaces", 2],
     "interface-name": false,

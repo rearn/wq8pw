@@ -1,11 +1,10 @@
 import express from 'express';
 import { Des } from '../modules/des';
-import { Db, IUriDocument } from '../modules/dbi';
+import { findUri } from '../modules/dbi';
 import * as store from '../modules/store';
 const router = express.Router();
 
 const c: Des = store.c;
-const db: Db = store.db;
 
 router.get('/:id', async (req, res, next) => {
   let a: Uint32Array;
@@ -15,14 +14,13 @@ router.get('/:id', async (req, res, next) => {
     res.sendStatus(404);
     return next();
   }
-  const url: IUriDocument[] = await db.find({addId: a[0], id: a[1]});
-  if (url.length === 0) {
+  const url = await findUri(a);
+  if (url === undefined) {
     res.sendStatus(404);
     return next();
   }
-  const uri = url[0];
-  if (uri.type === 0) {
-    return res.redirect(301, uri.uri);
+  if (! url.antenna) {
+    return res.redirect(301, url.uri);
   }
   const html = `
   <!DOCTYPE html>
@@ -39,7 +37,7 @@ router.get('/:id', async (req, res, next) => {
       <p>
         要求されたアクセスは以下の URL です。
       </p>
-      <a href="${uri.uri}">${uri.uri}</a>
+      <a href="${url.uri}">${url.uri}</a>
     </section>
   </body>
   </html>
