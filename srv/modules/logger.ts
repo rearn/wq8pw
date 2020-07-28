@@ -4,6 +4,7 @@
 import { createLogger, format, transports } from 'winston';
 import morgan from 'morgan';
 import { FileLogger, Logger } from 'typeorm';
+import { env } from './store';
 
 /**
  * logger 取得
@@ -27,10 +28,17 @@ export const logger = (() => {
     ),
   });
   const a = createLogger({
-    transports: [
-      devConsol,
-      fileOut,
-    ],
+    transports: (() => {
+      if (env === 'test') {
+        return [
+          fileOut,
+        ];
+      }
+      return [
+        devConsol,
+        fileOut,
+      ];
+    })(),
   });
   // 初回実行なのでその旨を表示
   a.info('app start');
