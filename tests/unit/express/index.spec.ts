@@ -9,8 +9,8 @@ import { beginConnection, closeConnection } from '../../../srv/dbConnection';
 const tableSetUp = async () => {
   const connection = await beginConnection();
   await connection.query('CREATE TABLE `wq8pw` (`id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, `uri` varchar(1024) NOT NULL, `antenna` tinyint NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB');
-  await connection.query('INSERT INTO `wq8pw` VALUES (0, `http://example.com/`, false)');
-  await connection.query('INSERT INTO `wq8pw` VALUES (1, `http://example.org/test.html`, true)');
+  await connection.query('INSERT INTO `wq8pw` VALUES (0, "http://example.com/", false)');
+  await connection.query('INSERT INTO `wq8pw` VALUES (1, "http://example.org/test.html", true)');
   await closeConnection();
 };
 
