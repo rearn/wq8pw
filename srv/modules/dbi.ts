@@ -1,6 +1,7 @@
 import { getRepository, BaseEntity } from 'typeorm';
 import { Wq8pw } from '../entity/Wq8pw';
 import { beginConnection } from '../dbConnection';
+import { env } from './store';
 
 const uint2stringint = (v: Uint32Array) => {
   const u = BigInt(v[0]);
@@ -13,7 +14,7 @@ const uint2stringint = (v: Uint32Array) => {
 export const findAll = async () => {
   const conn = await beginConnection();
   BaseEntity.useConnection(conn);
-  const wq8pwRepositry = getRepository(Wq8pw);
+  const wq8pwRepositry = getRepository(Wq8pw, env);
   const idList = await wq8pwRepositry.find({});
   return idList;
 };
@@ -21,7 +22,7 @@ export const findAll = async () => {
 export const findUri = async (id: Uint32Array) => {
   const conn = await beginConnection();
   BaseEntity.useConnection(conn);
-  const wq8pwRepositry = getRepository(Wq8pw);
+  const wq8pwRepositry = getRepository(Wq8pw, env);
   const idList = await wq8pwRepositry.findOne({
     where: { id: uint2stringint(id) },
   });
@@ -31,7 +32,7 @@ export const findUri = async (id: Uint32Array) => {
 export const findId = async (uri: string, antenna: boolean) => {
   const conn = await beginConnection();
   BaseEntity.useConnection(conn);
-  const wq8pwRepositry = getRepository(Wq8pw);
+  const wq8pwRepositry = getRepository(Wq8pw, env);
   const idList = await wq8pwRepositry.findOne({
     select: ['id'],
     where: { uri, antenna },
