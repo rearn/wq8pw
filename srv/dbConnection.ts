@@ -11,6 +11,7 @@ let connection: Connection|null = null;
  * DB への接続
  */
 export const beginConnection = async () => {
+  logger.info(env);
   if (connection === null) {
     const v = await getConnectionOptions(env);
     connection = await createConnection(
