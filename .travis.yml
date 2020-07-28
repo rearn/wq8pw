@@ -5,6 +5,7 @@ node_js:
   - "12"
   - "10"
   - "node"
+  - "lts/*"
 
 env:
   - MARIA_VERSION=10.5
