@@ -4,13 +4,11 @@
     table
       tbody
         tr
-          th id
           th short
           th long
           th uri
           th type
         tr(v-for="item in message")
-          td {{ item.num }}
           td {{ item.encrypt.short }}
           td {{ item.encrypt.long }}
           td {{ item.uri }}
@@ -22,8 +20,6 @@ import { Component, Vue } from 'vue-property-decorator';
 
 interface Dlist {
   id: number;
-  addId: number;
-  num: string;
   encrypt: {
     short: string;
     logn: string;
