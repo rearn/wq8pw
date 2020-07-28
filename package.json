@@ -12,7 +12,9 @@
     "test:unit": "vue-cli-service test:unit",
     "test:coverage": "vue-cli-service test:unit --coverage",
     "codecov": "codecov",
-    "make:config": "cp config.default.json config.json && cp ormconfig.default.json ormconfig.json"
+    "make:config": "cp config.default.json config.json && cp ormconfig.default.json ormconfig.json",
+    "migration:run": "typeorm migration:run",
+    "migration:revert": "typeorm migration:revert"
   },
   "dependencies": {
     "adjuster": "^1.4.0",

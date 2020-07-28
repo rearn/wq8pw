@@ -18,6 +18,7 @@ before_install:
 
 before_script:
   - npm run make:config
+  - npm run migration:run
 
 script:
   - npm run test:coverage
