@@ -18,7 +18,7 @@ before_install:
 
 before_script:
   - npm run make:config
-  - NODE_ENV=test npm run migration:run
+  - npm run migration:run -- -c test
 
 script:
   - npm run test:coverage
