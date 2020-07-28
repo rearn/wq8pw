@@ -35,8 +35,8 @@ describe('POST', () => {
       .send({uri: 'http://example.com/', antenna: 0})
       .then((res) => {
         expect(res.status).toBe(200);
-        expect(res.text).toMatch('hv2zlkml76aj2');
-        expect(res.text).toMatch('PXWVqYv_gJ0');
+        expect(res.text).toMatch('4s5yxhl6exkos');
+        expect(res.text).toMatch('5LuLnX4l1Ok');
     });
   });
   it('change type', () => {
