@@ -1,8 +1,9 @@
 import express from 'express';
 import { Des } from '../../../../modules/des';
-import { findAll, stringint2uint } from '../../../../modules/dbi';
+import { findAll } from '../../../../modules/dbi';
 import * as store from '../../../../modules/store';
 import digest from '../../../../modules/digest';
+import { stringint2uint } from '../../../../modules/stringint';
 const router = express.Router();
 
 router.use(digest);
