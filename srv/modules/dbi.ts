@@ -84,10 +84,6 @@ export const update = async (uri: string, antenna: boolean) => {
   a.antenna = antenna;
   BaseEntity.useConnection(conn);
   await a.save();
-  const find2 = await findId(uri, antenna);
-  if (find2 !== undefined) {
-    return stringint2uint(find2.id);
-  }
-  throw new Error('ありえないはず');
+  return stringint2uint(a.id);
 };
 
