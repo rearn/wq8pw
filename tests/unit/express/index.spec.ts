@@ -4,7 +4,7 @@
 
 import request from 'supertest';
 import app from '../../../srv/test';
-import { beginConnection, closeConnection } from '../../../srv/dbConnection';
+import { beginConnection, closeConnection } from '../../../srv/modules/dbConnection';
 
 const tableSetUp = async () => {
   const connection = await beginConnection();

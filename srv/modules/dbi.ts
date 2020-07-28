@@ -1,6 +1,6 @@
 import { getRepository, BaseEntity } from 'typeorm';
 import { Wq8pw } from '../entity/Wq8pw';
-import { beginConnection } from '../dbConnection';
+import { beginConnection } from './dbConnection';
 import { env } from './store';
 
 const uint2stringint = (v: Uint32Array) => {

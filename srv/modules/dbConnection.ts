@@ -2,8 +2,8 @@
  * @file DB 関連の関数群
  */
 import { getConnectionOptions, Connection, getConnectionManager } from 'typeorm';
-import { logger, TypeOrmWinstonLogger } from './logger';
-import { env } from './modules/store';
+import { logger, TypeOrmWinstonLogger } from '../logger';
+import { env } from './store';
 
 let connection: Connection|null = null;
 
