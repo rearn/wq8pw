@@ -13,7 +13,8 @@
     "test:coverage": "vue-cli-service test:unit --coverage",
     "codecov": "codecov",
     "make:config": "cp config.default.json config.json && cp ormconfig.default.json ormconfig.json",
-    "migration:run": "typeorm migration:run",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
+    "migration:run": "npm run typeorm -- migration:run",
     "migration:revert": "typeorm migration:revert"
   },
   "dependencies": {
