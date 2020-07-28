@@ -2,12 +2,9 @@ sudo: false
 language: node_js
 node_js:
   - "14"
-  - "13"
   - "12"
-  - "11"
   - "10"
-  - "9"
-  - "8"
+  - "node"
 
 env:
   - MARIA_VERSION=10.5
