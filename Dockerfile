@@ -1,8 +1,6 @@
-FROM python
+FROM node
 
-RUN pip install flask \
-                pyDes \
-                pymongo
+RUN mkdir /app
 
-WORKDIR /root
-CMD python init.py && python main.py
+WORKDIR /app
+CMD npm run serve:docker

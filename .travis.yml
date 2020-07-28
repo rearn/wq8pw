@@ -1,25 +1,27 @@
 sudo: false
-language: python
-python:
-  - 3.4
-  - 3.5
-  - 3.6
-  - 3.7-dev
-  - pypy3.5-5.8.0
+language: node_js
+node_js:
+  - "14"
+  - "12"
+  - "10"
+  - "node"
 
-install:
-  - pip install tox tox-travis
-  - pip install coverage coveralls
+env:
+  - MARIA_VERSION=10.5
+  - MARIA_VERSION=latest
 
-services: mongodb
+services: docker
+
+before_install:
+  - sudo /etc/init.d/mysql stop
+  - docker run -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=test_database -d -p 3306:3306 mariadb:${MARIA_VERSION}
 
 before_script:
-  - mongo test --eval 'db.createUser({user:"test",pwd:"test",roles:["readWrite"]});'
-  - make before_test
+  - npm run make:config
+  - sleep 5 && npm run migration:run -- -c test -t test
 
 script:
-  - tox
+  - npm run test:coverage
 
 after_success:
-  - coverage report
-  - coveralls
+  - npm run codecov
