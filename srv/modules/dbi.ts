@@ -1,4 +1,4 @@
-import { getRepository } from 'typeorm';
+import { getRepository, BaseEntity } from 'typeorm';
 import { Wq8pw } from '../entity/Wq8pw';
 import { beginConnection } from '../dbConnection';
 
@@ -11,14 +11,16 @@ const uint2stringint = (v: Uint32Array) => {
 };
 
 export const findAll = async () => {
-  await beginConnection();
+  const conn = await beginConnection();
+  BaseEntity.useConnection(conn);
   const wq8pwRepositry = getRepository(Wq8pw);
   const idList = await wq8pwRepositry.find({});
   return idList;
 };
 
 export const findUri = async (id: Uint32Array) => {
-  await beginConnection();
+  const conn = await beginConnection();
+  BaseEntity.useConnection(conn);
   const wq8pwRepositry = getRepository(Wq8pw);
   const idList = await wq8pwRepositry.findOne({
     where: { id: uint2stringint(id) },
@@ -27,7 +29,8 @@ export const findUri = async (id: Uint32Array) => {
 };
 
 export const findId = async (uri: string, antenna: boolean) => {
-  await beginConnection();
+  const conn = await beginConnection();
+  BaseEntity.useConnection(conn);
   const wq8pwRepositry = getRepository(Wq8pw);
   const idList = await wq8pwRepositry.findOne({
     select: ['id'],
@@ -43,7 +46,8 @@ export const stringint2uint = (v: string) => {
 };
 
 export const update = async (uri: string, antenna: boolean) => {
-  await beginConnection();
+  const conn = await beginConnection();
+  BaseEntity.useConnection(conn);
   const find = await findId(uri, antenna);
   if (find !== undefined) {
     return stringint2uint(find.id);
