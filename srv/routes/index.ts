@@ -7,7 +7,7 @@ const router = express.Router();
 const c: Des = store.c;
 
 router.get('/:id', async (req, res, next) => {
-  let a: Uint32Array;
+  let a: string;
   try {
     a = c.decrypt(req.params.id);
   } catch (err) {

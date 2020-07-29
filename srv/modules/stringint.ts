@@ -36,6 +36,9 @@ export const stringint2uint = (v: string) => {
       d -= e * 0xffffffff;
       c = c * 10 + e;
     }
+    if (c > 0xffffffff) {
+      throw new Error('でかすぎる');
+    }
     return new Uint32Array([c, d]);
   }
   return new Uint32Array([0, parseInt(v, 10)]);

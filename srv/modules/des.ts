@@ -1,6 +1,7 @@
 import { DES } from 'simple-des-crypto';
 import { uint32toUint8, uint8toUint32 } from 'type-array-convert';
 import { base64url, base32 } from 'rfc4648';
+import { stringint2uint, uint2stringint } from './stringint';
 
 export interface UriString {
   short: string;
@@ -13,17 +14,14 @@ export class Des {
     this.des = new DES(key);
   }
 
-  public encrypt = (data: Uint32Array): UriString => {
-    if (data.length !== 2) {
-      throw new Error('data.length is not 2.');
-    }
-    const code: Uint8Array = this.des.encrypt(uint32toUint8(data));
+  public encrypt = (data: string): UriString => {
+    const code: Uint8Array = this.des.encrypt(uint32toUint8(stringint2uint(data)));
     const short: string = base64url.stringify(code).slice(0, 11);
     const long: string = base32.stringify(code).slice(0, 13).toLowerCase();
     return {short, long};
   }
 
-  public decrypt = (data: string): Uint32Array => {
+  public decrypt = (data: string): string => {
     const code: Uint8Array = (() => {
       if (data.length === 11) {
         return base64url.parse(data, {out: Uint8Array, loose: true});
@@ -33,6 +31,6 @@ export class Des {
         throw new Error('data.length is not 11 or 13.');
       }
     })();
-    return uint8toUint32(this.des.decrypt(code));
+    return uint2stringint(uint8toUint32(this.des.decrypt(code)));
   }
 }

@@ -14,7 +14,7 @@ router.post('/accept/post', async (req, res) => {
   }
   const type: boolean = req.body.antenna; // ???
 
-  const id: Uint32Array = await update(uri, type);
+  const id: string = await update(uri, type);
   const retUri: UriString = c.encrypt(id);
   res.json(retUri);
 });
