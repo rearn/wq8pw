@@ -83,7 +83,9 @@
     "collectCoverageFrom": [
       "**/*.{ts,js,vue}",
       "!**/*.d.ts",
-      "!**/plugins/**"
+      "!**/plugins/**",
+      "!**/coverage/**",
+      "!**/*config.js"
     ],
     "moduleFileExtensions": [
       "js",
