@@ -24,19 +24,21 @@ export const uint2stringint = (v: Uint32Array) => {
 
 export const stringint2uint = (v: string) => {
   if (v.length >= 10) {
+    const m = 0x100000000;
+    const n = 10;
     const a = parseInt(v.slice(0, 10), 10);
     // tslint:disable-next-line:no-shadowed-variable
     const b = v.slice(10).split('').map((v) => parseInt(v, 10));
-    let c = Math.floor(a / 0xffffffff);
-    let d = a - c * 0xffffffff;
+    let c = Math.floor(a / m);
+    let d = a - c * m;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < b.length; i++) {
-      d += b[i] * 10;
-      const e = Math.floor(d / 0xffffffff);
-      d -= e * 0xffffffff;
-      c = c * 10 + e;
+      d = d * n + b[i];
+      const e = Math.floor(d / m);
+      d -= e * m;
+      c = c * n + e;
     }
-    if (c > 0xffffffff) {
+    if (c >= m) {
       throw new Error('でかすぎる');
     }
     return new Uint32Array([c, d]);
