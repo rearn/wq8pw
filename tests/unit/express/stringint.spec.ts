@@ -36,12 +36,16 @@ describe('stringint2uint', () => {
     const inData = '78187493520';
     const outData = new Uint32Array([0x00000012, 0x34567890]);
     expect(stringint.stringint2uint(inData)).toStrictEqual(outData);
-
   });
 
   it('long', () => {
     const inData = '1145148108931919';
     const outData = new Uint32Array([0x00041181, 0x923f834f]);
     expect(stringint.stringint2uint(inData)).toStrictEqual(outData);
+  });
+
+  it('err', () => {
+    const inData = '18446744073709551616';
+    expect(() => stringint.stringint2uint(inData)).toThrow();
   });
 });
