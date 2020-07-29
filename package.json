@@ -80,6 +80,11 @@
       "/node_modules/",
       "/srv/migration/"
     ],
+    "collectCoverageFrom": [
+      "**/*.{ts,js,vue}",
+      "!**/*.d.ts",
+      "!**/plugins/**"
+    ],
     "moduleFileExtensions": [
       "js",
       "jsx",
