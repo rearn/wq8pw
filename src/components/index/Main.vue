@@ -17,7 +17,7 @@ export default class Main extends Vue {
   @Prop() private user!: string;
   private username = {
     url: 'https://twitter.com/' + this.user,
-    account: '@#' + this.user,
+    account: '@' + this.user,
   };
 }
 </script>
