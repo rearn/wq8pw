@@ -3,10 +3,6 @@ import { Dbi } from './dbi';
 import allConfig from '../../config.json';
 interface Iconfig {
   [key: string]: {
-    db: {
-      uri: string;
-      name: string;
-    };
     des: {
       key: string;
     };
