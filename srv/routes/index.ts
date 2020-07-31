@@ -1,20 +1,16 @@
 import express from 'express';
-import { Des } from '../modules/des';
-import { findUri } from '../modules/dbi';
 import * as store from '../modules/store';
 const router = express.Router();
-
-const c: Des = store.c;
 
 router.get('/:id', async (req, res, next) => {
   let a: string;
   try {
-    a = c.decrypt(req.params.id);
+    a = store.c.decrypt(req.params.id);
   } catch (err) {
     res.sendStatus(404);
     return next();
   }
-  const url = await findUri(a);
+  const url = await store.dbi.findUri(a);
   if (url === undefined) {
     res.sendStatus(404);
     return next();

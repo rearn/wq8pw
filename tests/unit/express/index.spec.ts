@@ -4,20 +4,20 @@
 
 import request from 'supertest';
 import app from '../../../srv/test';
-import { beginConnection, closeConnection } from '../../../srv/modules/dbConnection';
+import { dbi } from '../../../srv/modules/store';
 
 const tableSetUp = async () => {
-  const connection = await beginConnection();
+  const connection = await dbi.beginConnection();
   await connection.query('CREATE TABLE `wq8pw` (`id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, `uri` varchar(1024) NOT NULL, `antenna` tinyint NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB');
   await connection.query('INSERT INTO `wq8pw` VALUES (1, "http://example.com/", false)');
   await connection.query('INSERT INTO `wq8pw` VALUES (2, "http://example.org/test.html", true)');
-  await closeConnection();
+  await dbi.closeConnection();
 };
 
 const tebleReset = async () => {
-  const connection = await beginConnection();
+  const connection = await dbi.beginConnection();
   await connection.query('DROP TABLE `wq8pw`');
-  await closeConnection();
+  await dbi.closeConnection();
 };
 
 beforeAll(tebleReset);
