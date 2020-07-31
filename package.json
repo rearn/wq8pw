@@ -78,6 +78,7 @@
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
       "/node_modules/",
+      "/src/views/",
       "/srv/migration/"
     ],
     "collectCoverageFrom": [
