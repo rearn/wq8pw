@@ -9,4 +9,11 @@ describe('Main.vue', () => {
     });
     expect((wrapper.find('a').element as HTMLAnchorElement).href).toMatch(`https://twitter.com/${user}`);
   });
+  it('msg', () => {
+    const user = 'bbb';
+    const wrapper = shallowMount(Main, {
+      propsData: { user },
+    });
+    expect((wrapper.find('a').element as HTMLAnchorElement).text).toMatch(`@${user}`);
+  });
 });
