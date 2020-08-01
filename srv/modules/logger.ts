@@ -41,7 +41,7 @@ export const logger = (() => {
     })(),
   });
   // 初回実行なのでその旨を表示
-  a.info('app start');
+  a.info(`app start (env: ${env})`);
   return a;
 })();
 
