@@ -1,54 +1,96 @@
 {
-  "development": {
-    "des": {
-      "key": "12345678"
-    },
-    "recaptcha": {
-      "use": false
-    },
-    "master": {
-      "auth": [
-        {
-          "user": "rearn",
-          "pass": "aaa"
-        },
-        {
-          "user": "min",
-          "pass": "ccc"
-        }
-      ]
+  "common": {
+    "db": {
+      "type": "mariadb",
+      "port": 3306,
+      "synchronize": false,
+      "logging": true,
+      "entities": [
+        "srv/entity/**/*.ts"
+      ],
+      "migrations": [
+        "srv/migration/**/*.ts"
+      ],
+      "subscribers": [
+        "srv/subscriber/**/*.ts"
+      ],
+      "cli": {
+        "entitiesDir": "srv/entity",
+        "migrationsDir": "srv/migration",
+        "subscribersDir": "srv/subscriber"
+      }
     }
   },
-  "test": {
-    "des": {
-      "key": "12345678"
+  "uniquely": {
+    "development": {
+      "des": {
+        "key": "12345678"
+      },
+      "recaptcha": {
+        "use": false
+      },
+      "master": {
+        "auth": [
+          {
+            "user": "rearn",
+            "pass": "aaa"
+          },
+          {
+            "user": "min",
+            "pass": "ccc"
+          }
+        ]
+      },
+      "db": {
+        "host": "maria",
+        "username": "docker",
+        "password": "docker",
+        "database": "test_database"
+      }
     },
-    "recaptcha": {
-      "use": false
+    "test": {
+      "des": {
+        "key": "12345678"
+      },
+      "recaptcha": {
+        "use": false
+      },
+      "master": {
+        "auth": [
+          {
+            "user": "min",
+            "pass": "ccc"
+          }
+        ]
+      },
+      "db": {
+        "host": "localhost",
+        "username": "test",
+        "password": "test",
+        "database": "test_database"
+      }
     },
-    "master": {
-      "auth": [
-        {
-          "user": "min",
-          "pass": "ccc"
-        }
-      ]
-    }
-  },
-  "production": {
-    "des": {
-      "key": ""
-    },
-    "recaptcha": {
-      "use": false
-    },
-    "master": {
-      "auth": [
-        {
-          "user": "",
-          "pass": ""
-        }
-      ]
+    "production": {
+      "des": {
+        "key": ""
+      },
+      "recaptcha": {
+        "use": false
+      },
+      "master": {
+        "auth": [
+          {
+            "user": "",
+            "pass": ""
+          }
+        ]
+      },
+      "db": {
+        "host": "maria",
+        "username": "",
+        "password": "",
+        "database": ""
+      }
     }
   }
 }
