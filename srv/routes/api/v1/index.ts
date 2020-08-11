@@ -15,7 +15,7 @@ router.post('/accept/post', async (req, res) => {
     if (recaptchaRes === undefined) {
       return res.status(403).end();
     }
-    const u = `https://www.google.com/recaptcha/api/siteverify?secret=${store.recaptcha.key}&response=${recaptchaRes}`;
+    const u = `https://www.google.com/recaptcha/api/siteverify?secret=${store.recaptcha.secretkey}&response=${recaptchaRes}`;
     const j = await axios.get(u, {
       headers: {
         'Content-Type': 'application/json',
@@ -35,5 +35,10 @@ router.post('/accept/post', async (req, res) => {
   const retUri: UriString = store.c.encrypt(id);
   res.json(retUri);
 });
-
+router.post('/recaptcha.json', async (req, res) => {
+  if (store.recaptcha.use) {
+    return res.json({ sitekey: store.recaptcha.sitekey });
+  }
+  return res.status(404).end();
+});
 export default router;

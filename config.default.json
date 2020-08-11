@@ -28,7 +28,8 @@
       },
       "recaptcha": {
         "use": false,
-        "key": ""
+        "secretkey": "",
+        "sitekey": ""
       },
       "master": {
         "auth": [
@@ -55,7 +56,8 @@
       },
       "recaptcha": {
         "use": false,
-        "key": ""
+        "secretkey": "",
+        "sitekey": ""
       },
       "master": {
         "auth": [
@@ -78,7 +80,8 @@
       },
       "recaptcha": {
         "use": false,
-        "key": ""
+        "secretkey": "",
+        "sitekey": ""
       },
       "master": {
         "auth": [
