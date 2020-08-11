@@ -1,6 +1,6 @@
 const conf = require('./config.json');
 
-module.exports = Object.entities(conf.uniquely).map((v) => {
+module.exports = Object.entries(conf.uniquely).map((v) => {
   return {
     name: v[0],
     host: v[1].db.host,
