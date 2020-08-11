@@ -69,68 +69,53 @@ export default class Submit extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-$enter-derlay-time: 0.5s;
-$leave-derlay-time: 0.5s;
-$enter-time: 0.5s;
-$leave-time: 0.5s;
-.v-enter-active {
-  max-height: 100vh;
-  transition: max-height $enter-derlay-time linear, opacity $enter-time linear $enter-derlay-time;
-}
-.v-leave-active {
-  max-height: 100vh;
-  transition: max-height $leave-time linear $leave-derlay-time, opacity $leave-derlay-time linear;
-}
-.v-enter{
-  opacity: 0;
-  max-height: 0;
-}
-.v-leave-to {
-  opacity: 0;
-  max-height: 0;
-}
-p.warning:before {
-  content: "※";
-}
-label:after {
-  content: ": ";
-}
-form {
-  width: 18em;
-  border: 1px solid #aaa;
-  margin: auto;
-}
-div.result {
-  background-color: #ffeeee;
-  margin: auto;
-  border: 1px dashed #aaa;
-  div {
-    text-align: left;
-    div.output {
-      margin: auto;
-      width: 18em;
-      label {
-        display: block;
-        margin: auto;
-        text-align: left;
-      }
-      input {
-        display: block;
-        margin: auto;
-        width: 20em;
-      }
-      button {
-        display: block;
-        margin: auto;
-      }
-    }
-  }
-  div.uri {
-    text-align: center;
-    span {
-      padding-right: 0.5em;
-    }
-  }
-}
+<style scoped lang="stylus">
+$enter-derlay-time 0.5s
+$leave-derlay-time 0.5s
+$enter-time 0.5s
+$leave-time 0.5s
+.v-enter-active
+  max-height 100vh
+  transition max-height $enter-derlay-time linear, opacity $enter-time linear $enter-derlay-time
+.v-leave-active
+  max-height 100vh
+  transition max-height $leave-time linear $leave-derlay-time, opacity $leave-derlay-time linear
+.v-enter
+  opacity 0
+  max-height 0
+.v-leave-to
+  opacity 0
+  max-height 0
+p.warning:before
+  content "※"
+label:after
+  content ": "
+form
+  width 18em
+  border 1px solid #aaa
+  margin auto
+div.result
+  background-color #ffeeee
+  margin auto
+  border 1px dashed #aaa
+  div
+    text-align left
+    div.output
+      margin auto
+      width 18em
+      label
+        display block
+        margin auto
+        text-align left
+      input
+        display block
+        margin auto
+        width 20em
+      button
+        display block
+        margin auto
+  div.uri
+    text-align center
+    span
+      padding-right 0.5em
 </style>
