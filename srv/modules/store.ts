@@ -8,6 +8,7 @@ interface Iconfig {
     };
     recaptcha: {
       use: boolean;
+      key: string;
     };
     master: {
       auth: Array<{
