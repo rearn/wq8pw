@@ -52,7 +52,6 @@ const init = new Init();
 
 (window as any).onloadCallback = () => {
   init.flag = true;
-  console.log('recaptcha loaded');
   return;
 };
 
@@ -67,8 +66,8 @@ const init = new Init();
           sitekey: this.$store.state.Recaptcha.sitekey,
         });
       }
-    });
-  },
+    })
+  }
 })
 export default class Submit extends Vue {
   @Prop() private msg!: string;
