@@ -31,27 +31,12 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import axios from 'axios';
+import RecaptchaInit from './RecaptchaInit';
 
-class Init {
-  public flag = false;
-  public async wait() {
-    const intervalId = setInterval(() => {
-      if (window.hasOwnProperty('grecaptcha')) {
-        if ((window as any).grecaptcha.hasOwnProperty('render')) {
-          if (this.flag) {
-            clearInterval(intervalId);
-            return;
-          }
-        }
-      }
-    }, 100);
-  };
-};
-
-const init = new Init();
+const recaptchaInit = new RecaptchaInit();
 
 (window as any).onloadCallback = () => {
-  init.flag = true;
+  recaptchaInit.flag = true;
   return;
 };
 
@@ -59,15 +44,15 @@ const init = new Init();
   created() {
     Promise.all([
       this.$store.dispatch('getRecaptchaSitekeyAsync'),
-      init.wait(),
+      recaptchaInit.wait(),
     ]).then((v) => {
       if (this.$store.state.Recaptcha.use) {
         (window as any).grecaptcha.render('recaptcha', {
           sitekey: this.$store.state.Recaptcha.sitekey,
         });
       }
-    })
-  }
+    });
+  },
 })
 export default class Submit extends Vue {
   @Prop() private msg!: string;
