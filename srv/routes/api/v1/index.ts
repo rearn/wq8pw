@@ -10,6 +10,7 @@ router.post('/accept/post', async (req, res) => {
   if (! uriRe.test(uri)) {
     return res.status(400).end();
   }
+  /* istanbul ignore if  */
   if (store.recaptcha.use) {
     const recaptchaRes: string|undefined = req.body['g-recaptcha-response'];
     if (recaptchaRes === undefined) {
