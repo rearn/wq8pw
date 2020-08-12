@@ -35,7 +35,7 @@ router.post('/accept/post', async (req, res) => {
   const retUri: UriString = store.c.encrypt(id);
   res.json(retUri);
 });
-router.post('/recaptcha.json', async (req, res) => {
+router.get('/recaptcha.json', async (req, res) => {
   if (store.recaptcha.use) {
     return res.json({ sitekey: store.recaptcha.sitekey });
   }

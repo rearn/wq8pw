@@ -23,7 +23,7 @@
       p
         input(type="checkbox" name="antenna" v-model="antenna")
         | 自動ジャンプせず警告ページを表示する。
-      // div.g-recaptcha(data-sitekey="6LfEWDYUAAAAAPUPSx6IAIz1NUCCtRHfnEUp8xSY") 
+      div#recaptcha
       button(type="submit" value="submit") 送信する
     
 </template>
@@ -32,7 +32,42 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 
-@Component
+class Init {
+  public flag = false;
+  public async wait() {
+    const intervalId = setInterval(() => {
+      if (window.hasOwnProperty('grecaptcha')) {
+        if ((window as any).grecaptcha.hasOwnProperty('render')) {
+          if (this.flag) {
+            clearInterval(intervalId);
+            return;
+          }
+        }
+      }
+    }, 100);
+  };
+};
+
+const init = new Init();
+
+(window as any).onloadCallback = () => {
+  init.flag = true;
+  console.log('recaptcha loaded');
+  return;
+};
+
+@Component({
+  created() {
+    Promise.all([
+      this.$store.dispatch('getRecaptchaSitekeyAsync'),
+      init.wait(),
+    ]).then((v) => {
+      (window as any).grecaptcha.render('recaptcha', {
+        sitekey: this.$store.state.Sitekey,
+      });
+    });
+  },
+})
 export default class Submit extends Vue {
   @Prop() private msg!: string;
   private uri = '';
