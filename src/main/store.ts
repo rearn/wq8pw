@@ -11,13 +11,14 @@ export default new Vuex.Store({
   state: {
     List: '',
     Sitekey: '',
+    Recaptcha: {},
   },
   mutations: {
     setAboutTitle(state, list) {
       state.List = list;
     },
     setRecaptchaSitekey(state, data) {
-      state.Sitekey = data.sitekey;
+      state.Recaptcha = data;
     },
   },
   actions: {

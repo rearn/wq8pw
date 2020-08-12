@@ -36,9 +36,9 @@ router.post('/accept/post', async (req, res) => {
   res.json(retUri);
 });
 router.get('/recaptcha.json', async (req, res) => {
-  if (store.recaptcha.use) {
-    return res.json({ sitekey: store.recaptcha.sitekey });
-  }
-  return res.status(404).end();
+  return res.json({
+    use: store.recaptcha.use,
+    sitekey: store.recaptcha.sitekey,
+  });
 });
 export default router;

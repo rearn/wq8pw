@@ -62,9 +62,11 @@ const init = new Init();
       this.$store.dispatch('getRecaptchaSitekeyAsync'),
       init.wait(),
     ]).then((v) => {
-      (window as any).grecaptcha.render('recaptcha', {
-        sitekey: this.$store.state.Sitekey,
-      });
+      if (this.$store.state.Recaptcha.use) {
+        (window as any).grecaptcha.render('recaptcha', {
+          sitekey: this.$store.state.Recaptcha.sitekey,
+        });
+      }
     });
   },
 })
