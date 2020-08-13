@@ -1,23 +1,13 @@
 <template lang="pug">
-  div#about
-    h1 test
-    table
-      tbody
-        tr
-          th short
-          th long
-          th uri
-          th type
-        tr(v-for="item in message")
-          td {{ item.encrypt.short }}
-          td {{ item.encrypt.long }}
-          td {{ item.uri }}
-          td {{ item.type }}
+  div#app
+    Header(v-bind:msg="title")
+    Table(v-bind:message="message")
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-
+import Header from '@/components/master/Header.vue';
+import Table from '@/components/master/Table.vue';
 interface Dlist {
   id: number;
   encrypt: {
@@ -29,11 +19,18 @@ interface Dlist {
 }
 
 @Component({
+  components: {
+    Header,
+    Table,
+  },
   computed: {
     message() {
       const l: Dlist[] = this.$store.state.List;
       return this.$store.state.List;
       return 'aaa';
+    },
+    title() {
+      return 'test';
     },
   },
   created() {
