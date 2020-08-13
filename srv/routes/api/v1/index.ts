@@ -7,12 +7,14 @@ const uriRe = /^https?:\/\/((([a-z]|[0-9]|[-._~])|%[0-9a-f][0-9a-f]|[!$&'()*+,;=
 
 router.post('/accept/post', async (req, res) => {
   const uri: string = req.body.uri;
+  /* istanbul ignore if */
   if (! uriRe.test(uri)) {
     return res.status(400).end();
   }
   /* istanbul ignore if  */
   if (store.recaptcha.use) {
     const recaptchaRes: string|undefined = req.body['g-recaptcha-response'];
+    /* istanbul ignore if */
     if (recaptchaRes === undefined) {
       return res.status(403).end();
     }
@@ -23,11 +25,13 @@ router.post('/accept/post', async (req, res) => {
       },
       responseType: 'json',
     });
+    /* istanbul ignore if */
     if (! j.data.success) {
       return res.status(403).end();
     }
   }
   const type: boolean|undefined = req.body.antenna;
+  /* istanbul ignore if */
   if (type === undefined) {
     return res.status(400).end();
   }
