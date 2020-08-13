@@ -11,14 +11,17 @@ router.post('/accept/post', async (req, res) => {
   if (! uriRe.test(uri)) {
     return res.status(400).end();
   }
-  /* istanbul ignore if  */
+  /* istanbul ignore if */
   if (store.recaptcha.use) {
+    /* istanbul ignore next */
     const recaptchaRes: string|undefined = req.body['g-recaptcha-response'];
     /* istanbul ignore if */
     if (recaptchaRes === undefined) {
       return res.status(403).end();
     }
+    /* istanbul ignore next */
     const u = `https://www.google.com/recaptcha/api/siteverify?secret=${store.recaptcha.secretkey}&response=${recaptchaRes}`;
+    /* istanbul ignore next */
     const j = await axios.get(u, {
       headers: {
         'Content-Type': 'application/json',
