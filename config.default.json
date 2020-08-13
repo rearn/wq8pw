@@ -27,7 +27,9 @@
         "key": "12345678"
       },
       "recaptcha": {
-        "use": false
+        "use": false,
+        "secretkey": "",
+        "sitekey": ""
       },
       "master": {
         "auth": [
@@ -53,7 +55,9 @@
         "key": "12345678"
       },
       "recaptcha": {
-        "use": false
+        "use": false,
+        "secretkey": "",
+        "sitekey": ""
       },
       "master": {
         "auth": [
@@ -75,7 +79,9 @@
         "key": ""
       },
       "recaptcha": {
-        "use": false
+        "use": false,
+        "secretkey": "",
+        "sitekey": ""
       },
       "master": {
         "auth": [

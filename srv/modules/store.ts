@@ -8,6 +8,8 @@ interface Iconfig {
     };
     recaptcha: {
       use: boolean;
+      secretkey: string;
+      sitekey: string;
     };
     master: {
       auth: Array<{
@@ -20,6 +22,7 @@ interface Iconfig {
 
 export const env = process.env.NODE_ENV as string;
 const config = (allConfig.uniquely as Iconfig)[env];
+export const recaptcha = config.recaptcha;
 export const c: Des =  new Des(new Uint8Array(
   config.des.key.split('').map((v) => v.charCodeAt(0)),
 ));

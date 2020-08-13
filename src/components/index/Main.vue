@@ -4,7 +4,7 @@
     p
       |  当サイトは短縮URLサービスです。
       |  なにかありましたら、 
-      span Twitter:
+      span Twitter: 
         a(v-bind:href="username.url") {{ username.account }}
       | に連絡お願いします。
 </template>
