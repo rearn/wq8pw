@@ -1,6 +1,7 @@
-import config from './config.json';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const config = require('./config.json');
 
-export default Object.entries(config.uniquely).map((v) => ({
+module.exports = Object.entries(config.uniquely).map((v) => ({
   name: v[0],
   host: v[1].db.host,
   username: v[1].db.username,
