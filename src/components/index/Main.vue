@@ -3,8 +3,8 @@
     h2 当サイトについて
     p
       |  当サイトは短縮URLサービスです。
-      |  なにかありましたら、 
-      span Twitter: 
+      |  なにかありましたら、
+      span Twitter:
         a(v-bind:href="username.url") {{ username.account }}
       | に連絡お願いします。
 </template>
@@ -15,9 +15,10 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component
 export default class Main extends Vue {
   @Prop() private user!: string;
+
   private username = {
-    url: 'https://twitter.com/' + this.user,
-    account: '@' + this.user,
+    url: `https://twitter.com/${this.user}`,
+    account: `@${this.user}`,
   };
 }
 </script>

@@ -7,7 +7,7 @@
         div.uri
           span {{ item.uri }}
           | の短縮URLを作成しました。
-          | クリックでコピーできます。 
+          | クリックでコピーできます。
         div
           div.short.output
             label short URL
@@ -17,7 +17,7 @@
             input(type="text" v-model="item.long" readonly v-on:click="copy($event.toElement);")
         button(v-on:click="del(i);") 削除
     form(v-on:submit.prevent="send();")
-      p 
+      p
         label URL
         input(type="url" name="uri" v-model="uri" required)
       p
@@ -25,7 +25,6 @@
         | 自動ジャンプせず警告ページを表示する。
       div#recaptcha
       button(type="submit" value="submit") 送信する
-    
 </template>
 
 <script lang="ts">
@@ -35,9 +34,15 @@ import RecaptchaInit from './RecaptchaInit';
 
 const recaptchaInit = new RecaptchaInit();
 
+interface Msg {
+  uri: string;
+  antenna: boolean;
+  key?: number;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (window as any).onloadCallback = () => {
   recaptchaInit.flag = true;
-  return;
 };
 
 @Component({
@@ -45,8 +50,9 @@ const recaptchaInit = new RecaptchaInit();
     Promise.all([
       this.$store.dispatch('getRecaptchaSitekeyAsync'),
       recaptchaInit.wait(),
-    ]).then((v) => {
+    ]).then(() => {
       if (this.$store.state.Recaptcha.use) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (window as any).grecaptcha.render('recaptcha', {
           sitekey: this.$store.state.Recaptcha.sitekey,
         });
@@ -56,19 +62,28 @@ const recaptchaInit = new RecaptchaInit();
 })
 export default class Submit extends Vue {
   @Prop() private msg!: string;
+
   private uri = '';
+
   private antenna = false;
-  private message = Array();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private message: Msg[] = [];
+
   private key = 0;
+
   public send() {
-    const uri: string = this.uri;
-    const antenna = this.antenna;
-    if (confirm([uri, antenna].toString())) {
-      const a: { uri: string; antenna: boolean; key?: number } = {uri, antenna};
+    const { uri } = this;
+    const { antenna } = this;
+    // eslint-disable-next-line no-alert
+    if (window.confirm([uri, antenna].toString())) {
+      const a: Msg = { uri, antenna };
       console.log(a);
       axios.post('/api/v1/accept/post', a).then((b) => {
         const d = b.data;
-        Object.keys(d).map((v, i) => d[v] = window.location.href + d[v]);
+        Object.keys(d).forEach((v) => {
+          d[v] = window.location.href + d[v];
+        });
         Object.assign(a, d);
         a.key = this.key;
         this.key += 1;
@@ -77,11 +92,14 @@ export default class Submit extends Vue {
       });
     }
   }
+
+  /*
   public copy(element: HTMLInputElement) {
     element.select();
     document.execCommand('copy');
     alert('コピーしました。');
   }
+*/
   public del(index: number) {
     console.log(index);
     this.message.splice(index, 1);
