@@ -27,7 +27,7 @@ describe('Submit.vue', () => {
     });
   });
 
-  it('send uri', () => {
+  it('send uri', async () => {
     const post = { short: '6uX-6AZbLTo', long: 'TBIVTQ06BCMJK' };
     const uri = 'http://example.com/';
     const d = { short: `${window.location.href}6uX-6AZbLTo`, long: `${window.location.href}TBIVTQ06BCMJK` };
@@ -38,9 +38,10 @@ describe('Submit.vue', () => {
     expect(actions.getRecaptchaSitekeyAsync).toHaveBeenCalled();
     wrapper.find('[name="uri"]').setValue(uri);
     wrapper.find('form').trigger('submit.prevent');
-    return wrapper.vm.$nextTick().then(() => {
-      expect(wrapper.vm.$data.message).toContainEqual(ret);
-    });
+    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.$data.message).toContainEqual(ret);
   });
   it('del', () => {
     const uri = 'http://example.com/';
