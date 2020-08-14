@@ -12,6 +12,7 @@ export default new Vuex.Store({
     List: '',
     Sitekey: '',
     Recaptcha: {},
+    digest: {},
   },
   mutations: {
     setAboutTitle(state, list) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     setRecaptchaSitekey(state, data) {
       state.Recaptcha = data;
     },
+    setDigestUser(state, data) {
+      state.digest = data;
+    },
   },
   actions: {
     async getListAsync({ commit }) {
@@ -27,6 +31,9 @@ export default new Vuex.Store({
     },
     async getRecaptchaSitekeyAsync({ commit }) {
       commit('setRecaptchaSitekey', await axios.get('/api/v1/recaptcha.json').then((r) => r.data));
+    },
+    digestUserCreate({ commit }, data) {
+      commit('setDigestUser', () => data);
     },
   },
 });
