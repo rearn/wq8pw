@@ -25,9 +25,7 @@ interface Dlist {
   },
   computed: {
     message() {
-      const l: Dlist[] = this.$store.state.List;
       return this.$store.state.List;
-      return 'aaa';
     },
     title() {
       return 'test';
@@ -37,7 +35,6 @@ interface Dlist {
     this.$store.dispatch('getListAsync');
   },
 })
-
 
 export default class Master extends Vue {}
 </script>

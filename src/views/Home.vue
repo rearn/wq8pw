@@ -3,9 +3,8 @@
     Header(v-bind:msg="message")
     Main(v-bind:user="user")
     Submit()
-    
-</template>
 
+</template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
@@ -22,6 +21,7 @@ import Submit from '@/components/index/Submit.vue';
 })
 export default class Home extends Vue {
   public message = '短縮URLサービス wq8pw にようこそ';
+
   public user = 'rearn499';
 }
 </script>

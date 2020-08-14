@@ -4,8 +4,6 @@
 
 import * as stringint from '../../../srv/modules/stringint';
 
-
-
 describe('uint2stringint', () => {
   it('short', () => {
     const inData = new Uint32Array([0, 42]);

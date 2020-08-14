@@ -1,3 +1,4 @@
+/* eslint-disable vue/max-len */
 import { shallowMount } from '@vue/test-utils';
 import Main from '@/components/index/Main.vue';
 

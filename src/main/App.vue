@@ -24,4 +24,3 @@
   a+a
     border-left 1px solid #999
 </style>
-
