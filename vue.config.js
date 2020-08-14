@@ -1,16 +1,16 @@
 module.exports = {
   pages: {
     index: {
-      entry: 'src/main/main.ts'
-    }
+      entry: 'src/main/main.ts',
+    },
   },
   devServer: {
-    disableHostCheck: true
+    disableHostCheck: true,
   },
   pluginOptions: {
     express: {
       shouldServeApp: true,
-      serverDir: './srv'
-    }
-  }
-}
+      serverDir: './srv',
+    },
+  },
+};
