@@ -33,7 +33,11 @@ interface Dlist {
     },
   },
   created() {
-    this.$store.dispatch('getListAsync');
+    this.$store.dispatch('loadDigest')
+      .then(() => {
+        console.log('aaaa');
+        this.$store.dispatch('getListAsync');
+      });
   },
 })
 

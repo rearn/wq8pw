@@ -4,7 +4,6 @@ import { AxiosDigest } from 'axios-digest';
 import axios from 'axios';
 
 Vue.use(Vuex);
-const digestAxios = new AxiosDigest('rearn', 'aaa');
 
 export default new Vuex.Store({
   state: {
@@ -35,12 +34,12 @@ export default new Vuex.Store({
   },
   actions: {
     async getListAsync({ commit }) {
-      commit(
-        'setAboutTitle',
-        await (this.state.digestAxios as AxiosDigest)
+      if (this.state.digest.user !== '') {
+        const data = await (this.state.digestAxios as AxiosDigest)
           .get('/api/master/v1/content')
-          .then((r) => r.data),
-      );
+          .then((r) => r.data);
+        commit('setAboutTitle', data);
+      }
     },
     async getRecaptchaSitekeyAsync({ commit }) {
       commit(
@@ -48,8 +47,19 @@ export default new Vuex.Store({
         await axios.get('/api/v1/recaptcha.json').then((r) => r.data),
       );
     },
+    saveDigest() {
+      sessionStorage.setItem('digest', JSON.stringify(this.state.digest));
+    },
+    loadDigest({ commit }) {
+      const ssDigest = sessionStorage.getItem('digest');
+      console.log(ssDigest);
+      if (ssDigest !== null) {
+        commit('setDigestUser', JSON.parse(ssDigest));
+      }
+    },
     digestUserCreate({ commit }, data) {
       commit('setDigestUser', data);
+      this.dispatch('saveDigest');
     },
   },
 });
