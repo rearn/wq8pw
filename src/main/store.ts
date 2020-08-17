@@ -37,7 +37,6 @@ export default new Vuex.Store({
   actions: {
     async getListAsync({ commit }) {
       if (this.state.digest.user !== '') {
-        console.log(this.state.digestAxios);
         const data = await (this.state.digestAxios as AxiosDigest)
           .get('/api/master/v1/content')
           .then((r) => r.data);
@@ -55,7 +54,6 @@ export default new Vuex.Store({
     },
     loadDigest({ commit }) {
       const ssDigest = sessionStorage.getItem('digest');
-      console.log(ssDigest);
       if (ssDigest !== null) {
         commit('setDigestUser', JSON.parse(ssDigest));
       }

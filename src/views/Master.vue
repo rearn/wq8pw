@@ -35,7 +35,6 @@ interface Dlist {
   created() {
     this.$store.dispatch('loadDigest')
       .then(() => {
-        console.log('aaaa');
         this.$store.dispatch('getListAsync').catch(() => {
           this.$router.push('/master/login');
         });
