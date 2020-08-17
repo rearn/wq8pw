@@ -11,7 +11,11 @@ export default new Vuex.Store({
     List: '',
     Sitekey: '',
     Recaptcha: {},
-    digest: {},
+    digest: {
+      user: '',
+      password: '',
+    },
+    digestAxios: {},
   },
   mutations: {
     setAboutTitle(state, list) {
@@ -22,13 +26,20 @@ export default new Vuex.Store({
     },
     setDigestUser(state, data) {
       state.digest = data;
+      console.log(state.digest);
+      state.digestAxios = new AxiosDigest(
+        state.digest.user,
+        state.digest.password,
+      );
     },
   },
   actions: {
     async getListAsync({ commit }) {
       commit(
         'setAboutTitle',
-        await digestAxios.get('/api/master/v1/content').then((r) => r.data),
+        await (this.state.digestAxios as AxiosDigest)
+          .get('/api/master/v1/content')
+          .then((r) => r.data),
       );
     },
     async getRecaptchaSitekeyAsync({ commit }) {
@@ -38,7 +49,7 @@ export default new Vuex.Store({
       );
     },
     digestUserCreate({ commit }, data) {
-      commit('setDigestUser', () => data);
+      commit('setDigestUser', data);
     },
   },
 });

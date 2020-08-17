@@ -1,7 +1,7 @@
 <template lang="pug">
   section#auth
     form(v-on:submit.prevent="auth();")
-      p 
+      p
         label name
         input(type="text" name="name" v-model="name" required)
       p
@@ -11,27 +11,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
-  props: {
-    name: String,
-    pass: String,
-  },
   methods: {
-    send () {
+    auth() {
       this.$store.dispatch(
         'digestUserCreate',
         {
-          email: this.$props.name,
-          password: this.$props.pass,
+          user: this.$data.name,
+          password: this.$data.pass,
         },
-      );
-    }
-  }
+      ).then(() => this.$router.push('/master/all'));
+    },
+  },
 })
-export default class Main extends Vue {
-  @Prop() private user!: string;
+export default class Auth extends Vue {
+  private name = '';
+
+  private pass = '';
 }
 </script>
 

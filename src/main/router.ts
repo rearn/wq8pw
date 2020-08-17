@@ -18,5 +18,10 @@ export default new Router({
       name: 'master',
       component: () => import('../views/Master.vue'),
     },
+    {
+      path: '/master/all',
+      name: 'masterAll',
+      component: () => import('../views/MasterAll.vue'),
+    },
   ],
 });

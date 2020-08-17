@@ -1,13 +1,12 @@
 <template lang="pug">
   div#app
     Header(v-bind:msg="title")
-    Auth(v-bind:msg="title")
+    Table(v-bind:message="message")
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Header from '@/components/master/Header.vue';
-import Auth from '@/components/master/Auth.vue';
 import Table from '@/components/master/Table.vue';
 
 interface Dlist {
@@ -23,7 +22,6 @@ interface Dlist {
 @Component({
   components: {
     Header,
-    Auth,
     Table,
   },
   computed: {
@@ -33,6 +31,9 @@ interface Dlist {
     title() {
       return 'test';
     },
+  },
+  created() {
+    this.$store.dispatch('getListAsync');
   },
 })
 
