@@ -14,6 +14,11 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/master/login',
+      name: 'masterLogin',
+      component: () => import('../views/MasterLogin.vue'),
+    },
+    {
       path: '/master',
       name: 'master',
       component: () => import('../views/Master.vue'),
