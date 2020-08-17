@@ -24,17 +24,20 @@ export default new Vuex.Store({
       state.Recaptcha = data;
     },
     setDigestUser(state, data) {
-      state.digest = data;
-      console.log(state.digest);
-      state.digestAxios = new AxiosDigest(
-        state.digest.user,
-        state.digest.password,
-      );
+      if (state.digest.user !== data.user
+        || state.digest.password !== data.password) {
+        state.digest = data;
+        state.digestAxios = new AxiosDigest(
+          state.digest.user,
+          state.digest.password,
+        );
+      }
     },
   },
   actions: {
     async getListAsync({ commit }) {
       if (this.state.digest.user !== '') {
+        console.log(this.state.digestAxios);
         const data = await (this.state.digestAxios as AxiosDigest)
           .get('/api/master/v1/content')
           .then((r) => r.data);
