@@ -22,7 +22,7 @@ import { Component, Vue } from 'vue-property-decorator';
           user: this.$data.name,
           password: this.$data.pass,
         },
-      ).then(() => this.$router.push('/master/all'));
+      ).then(() => this.$router.push('/master'));
     },
   },
 })

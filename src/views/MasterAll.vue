@@ -38,7 +38,7 @@ interface Dlist {
         console.log('aaaa');
         this.$store.dispatch('getListAsync').then(() => {
           if (this.$store.state.List === '') {
-            this.$router.push('/master');
+            this.$router.push('/master/login');
           }
         });
       });

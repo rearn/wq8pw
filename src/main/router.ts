@@ -14,12 +14,12 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/master',
+      path: '/master/login',
       name: 'master',
       component: () => import('../views/Master.vue'),
     },
     {
-      path: '/master/all',
+      path: '/master',
       name: 'masterAll',
       component: () => import('../views/MasterAll.vue'),
     },
