@@ -36,5 +36,5 @@ interface Dlist {
   },
 })
 
-export default class Master extends Vue {}
+export default class MasterLogin extends Vue {}
 </script>
