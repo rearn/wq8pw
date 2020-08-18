@@ -1,7 +1,7 @@
 <template lang="pug">
   div#app
     router-view
-    div#nav
+    nav
       router-link(to="/") Home
       router-link(to="/master") Master
 </template>
@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing grayscale
   text-align center
   color #2c3e50
-#nav
+nav
   padding 30px
   a
     font-weight bold
