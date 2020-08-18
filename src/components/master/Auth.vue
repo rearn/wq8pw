@@ -7,7 +7,7 @@
       p
         label password
         input(type="password" name="pass" v-model="pass" required)
-      button(type="submit" value="submit") 送信する
+      button(type="submit" value="submit") Login
 </template>
 
 <script lang="ts">
@@ -35,8 +35,36 @@ export default class Auth extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-h2
-  margin 40px 0 0
-a
-  color #42b983
+form-width = 15rem
+button-width = 3rem
+top-color = #ccc
+right-color = #ccc
+
+form
+  text-align left
+  width form-width
+  margin auto
+  p
+    margin .2rem 0
+    width form-width
+    label
+      ::after
+        content '\a'
+        white-space pre
+    input
+      width form-width
+      box-sizing border-box
+      border-width 2px
+      border-style inset
+      border-color top-color right-color
+      border-radius .25rem
+  button
+    margin-left form-width - ((form-width + button-width) / 2)
+    width button-width
+    text-align center
+    border-width 2px
+    border-style outset
+    border-color top-color right-color
+    border-radius .25rem
+
 </style>

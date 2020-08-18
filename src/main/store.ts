@@ -27,6 +27,10 @@ export default new Vuex.Store({
       if (state.digest.user !== data.user
         || state.digest.password !== data.password) {
         state.digest = data;
+        if (state.digest.user === '') {
+          state.digestAxios = {};
+          return;
+        }
         state.digestAxios = new AxiosDigest(
           state.digest.user,
           state.digest.password,
@@ -39,7 +43,11 @@ export default new Vuex.Store({
       if (this.state.digest.user !== '') {
         const data = await (this.state.digestAxios as AxiosDigest)
           .get('/api/master/v1/content')
-          .then((r) => r.data);
+          .then((r) => r.data)
+          .catch((err) => {
+            this.dispatch('digestUserCreate', { user: '', password: '' });
+            throw err;
+          });
         commit('setAboutTitle', data);
       }
     },
@@ -50,6 +58,10 @@ export default new Vuex.Store({
       );
     },
     saveDigest() {
+      if (this.state.digest.user === '') {
+        sessionStorage.removeItem('digest');
+        return;
+      }
       sessionStorage.setItem('digest', JSON.stringify(this.state.digest));
     },
     loadDigest({ commit }) {
