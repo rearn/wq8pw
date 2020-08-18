@@ -1,9 +1,9 @@
 <template lang="pug">
   div#app
-    div#nav
-      router-link(to="/") Home
-      router-link(to="/master") Master
     router-view
+    nav
+      router-link(to="/") Top
+      router-link(to="/master") 管理画面
 </template>
 
 <style lang="stylus">
@@ -13,8 +13,9 @@
   -moz-osx-font-smoothing grayscale
   text-align center
   color #2c3e50
-#nav
+nav
   padding 30px
+  font-size .9em
   a
     font-weight bold
     color #2c3e50
