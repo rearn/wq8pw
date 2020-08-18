@@ -93,13 +93,14 @@ export default class Submit extends Vue {
     }
   }
 
-  /*
+  // eslint-disable-next-line class-methods-use-this
   public copy(element: HTMLInputElement) {
     element.select();
     document.execCommand('copy');
+    // eslint-disable-next-line no-alert
     alert('コピーしました。');
   }
-*/
+
   public del(index: number) {
     console.log(index);
     this.message.splice(index, 1);
