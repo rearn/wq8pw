@@ -1,9 +1,9 @@
 <template lang="pug">
   div#app
+    router-view
     div#nav
       router-link(to="/") Home
       router-link(to="/master") Master
-    router-view
 </template>
 
 <style lang="stylus">
