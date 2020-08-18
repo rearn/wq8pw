@@ -75,22 +75,19 @@ export default class Submit extends Vue {
   public send() {
     const { uri } = this;
     const { antenna } = this;
-    // eslint-disable-next-line no-alert
-    if (window.confirm([uri, antenna].toString())) {
-      const a: Msg = { uri, antenna };
-      console.log(a);
-      axios.post('/api/v1/accept/post', a).then((b) => {
-        const d = b.data;
-        Object.keys(d).forEach((v) => {
-          d[v] = window.location.href + d[v];
-        });
-        Object.assign(a, d);
-        a.key = this.key;
-        this.key += 1;
-        this.message.push(a);
-        console.log(this.message);
+    const a: Msg = { uri, antenna };
+    console.log(a);
+    axios.post('/api/v1/accept/post', a).then((b) => {
+      const d = b.data;
+      Object.keys(d).forEach((v) => {
+        d[v] = window.location.href + d[v];
       });
-    }
+      Object.assign(a, d);
+      a.key = this.key;
+      this.key += 1;
+      this.message.push(a);
+      console.log(this.message);
+    });
   }
 
   // eslint-disable-next-line class-methods-use-this
