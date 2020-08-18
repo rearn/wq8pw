@@ -2,8 +2,8 @@
   div#app
     router-view
     nav
-      router-link(to="/") Home
-      router-link(to="/master") Master
+      router-link(to="/") Top
+      router-link(to="/master") 管理画面
 </template>
 
 <style lang="stylus">
