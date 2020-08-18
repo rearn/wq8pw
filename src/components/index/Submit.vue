@@ -110,16 +110,16 @@ export default class Submit extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-$enter-derlay-time 0.5s
-$leave-derlay-time 0.5s
-$enter-time 0.5s
-$leave-time 0.5s
+enter-derlay-time = 0.5s
+leave-derlay-time = 0.5s
+enter-time = 0.5s
+leave-time = 0.5s
 .v-enter-active
   max-height 100vh
-  transition max-height $enter-derlay-time linear, opacity $enter-time linear $enter-derlay-time
+  transition max-height enter-derlay-time linear, opacity enter-time linear enter-derlay-time
 .v-leave-active
   max-height 100vh
-  transition max-height $leave-time linear $leave-derlay-time, opacity $leave-derlay-time linear
+  transition max-height leave-time linear leave-derlay-time, opacity leave-derlay-time linear
 .v-enter
   opacity 0
   max-height 0
