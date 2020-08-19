@@ -1,10 +1,13 @@
-sudo: false
+os: linux
+dist: focal
 language: node_js
 node_js:
   - "14"
   - "12"
   - "10"
   - "node"
+  - "lts/*"
+cache: npm
 
 env:
   - MARIA_VERSION=10.5
@@ -18,7 +21,7 @@ before_install:
 
 before_script:
   - npm run make:config
-  - sleep 5 && npm run migration:run -- -c test -t test
+  - sleep 10 && npm run migration:run -- -c test -t test
 
 script:
   - npm run test:coverage

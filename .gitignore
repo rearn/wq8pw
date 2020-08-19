@@ -1,8 +1,6 @@
 # wq8pw
 config.json
-ormconfig.json
-templates/*.html
-templates/robots.txt
+public/robots.txt
 db/
 
 .DS_Store

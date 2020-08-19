@@ -1,6 +1,8 @@
+/* eslint-disable vue/max-len */
+/* eslint-disable class-methods-use-this */
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class Initialize1595338181428 implements MigrationInterface {
+export default class Initialize1595338181428 implements MigrationInterface {
   public name = 'Initialize1595338181428';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -10,5 +12,4 @@ export class Initialize1595338181428 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('DROP TABLE `wq8pw`');
   }
-
 }
