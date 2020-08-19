@@ -1,28 +1,55 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import express from 'express';
 import crypto from 'crypto';
-import { passwd } from './store';
 import { base64 } from 'rfc4648';
+import { passwd } from './store';
 
-export default (req: express.Request, res: express.Response, next: express.NextFunction) => {
+export default (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
   const authHeaderu = req.get('Authorization');
   const authHeader: string = authHeaderu !== undefined ? authHeaderu : '';
   if (authHeader !== undefined && authHeader.slice(0, 6) === 'Digest') {
     const paramsArray: string[] = authHeader.slice(6).trim().split(/\s*,\s*/);
-    const paramsKvArray: Array<[string, string]> = paramsArray.map<[string, string]>((value) => {
-      const ret = value.split(/\s*=(?:(?=[^"]*"[^"]*")|(?!"))\s*/, 2).map((v2) => {
-        return v2.replace(/^"/, '').replace(/"$/, '');
-      });
+    const paramsKvArray: Array<[string, string]> = paramsArray.map((value) => {
+      const ret = value.split(
+        /\s*=(?:(?=[^"]*"[^"]*")|(?!"))\s*/,
+        2,
+      ).map((v2) => v2.replace(/^"/, '').replace(/"$/, ''));
       return [ret[0], ret[1]];
     });
     const params: {[s: string]: string} = (() => {
       const t: {[s: string]: string} = {};
-      paramsKvArray.forEach((value) => t[value[0]] = value[1]);
+      paramsKvArray.forEach((value) => {
+        // eslint-disable-next-line prefer-destructuring
+        t[value[0]] = value[1];
+      });
       return t;
     })();
-    const calams = ['username', 'realm', 'nonce', 'uri', 'cnonce', 'nc', 'qop', 'response', 'opaque'];
-    if (calams.filter((value) => ! (value in params)).length === 0) {
+    const calams = [
+      'username',
+      'realm',
+      'nonce',
+      'uri',
+      'cnonce',
+      'nc',
+      'qop',
+      'response',
+    ];
+    if (calams.filter((value) => !(value in params)).length === 0) {
       const algorithm = params.algorithm || 'MD5';
-      const { username, realm, nonce, uri, cnonce, nc, qop, response, opaque} = params;
+      const {
+        username,
+        realm,
+        nonce,
+        uri,
+        cnonce,
+        nc,
+        qop,
+        response,
+      } = params;
 
       const hashFunc = (): crypto.Hash => {
         if (algorithm === 'MD5') {
@@ -34,9 +61,10 @@ export default (req: express.Request, res: express.Response, next: express.NextF
         return crypto.createHash('sha512-256');
       };
 
-      const hashHex = (str: string): string => {
-        return hashFunc().update(str, 'utf8').digest('hex');
-      };
+      const hashHex = (str: string) => hashFunc().update(
+        str,
+        'utf8',
+      ).digest('hex');
 
       if (passwd.has(username)) {
         const a1 = [username, realm, passwd.get(username)].join(':');
@@ -46,7 +74,8 @@ export default (req: express.Request, res: express.Response, next: express.NextF
         const a3 = [a1hash, nonce, nc, cnonce, qop, a2hash].join(':');
         const a3hash = hashHex(a3);
         if (response === a3hash) {
-          return next();
+          next();
+          return;
         }
       }
     }
@@ -59,15 +88,15 @@ export default (req: express.Request, res: express.Response, next: express.NextF
     'Digest realm="http-auth@example.org"',
     'qop="auth"',
     'algorithm=SHA-256',
-    'nonce="' + nonce2 + '"',
-    'opaque="' + opaque2 + '"',
+    `nonce="${nonce2}"`,
+    `opaque="${opaque2}"`,
   ];
   const w = [
     'Digest realm="http-auth@example.org"',
     'qop="auth',
     'algorithm=MD5',
-    'nonce="' + nonce2 + '"',
-    'opaque="' + opaque2 + '"',
+    `nonce="${nonce2}"`,
+    `opaque="${opaque2}"`,
   ];
   res.append('WWW-Authenticate', w);
   res.append('WWW-Authenticate', v);

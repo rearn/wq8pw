@@ -7,7 +7,7 @@ export const uint2stringint = (v: Uint32Array) => {
 
   const u = Math.floor(v[0] / n);
   const l = v[0] - u * n;
-  const ll =  l * n * n + v[1];
+  const ll = l * n * n + v[1];
   if (u === 0) {
     return ll.toString();
   }
@@ -27,12 +27,10 @@ export const stringint2uint = (v: string) => {
     const m = 0x100000000;
     const n = 10;
     const a = parseInt(v.slice(0, 10), 10);
-    // tslint:disable-next-line:no-shadowed-variable
-    const b = v.slice(10).split('').map((v) => parseInt(v, 10));
+    const b = v.slice(10).split('').map((v2) => parseInt(v2, 10));
     let c = Math.floor(a / m);
     let d = a - c * m;
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < b.length; i++) {
+    for (let i = 0; i < b.length; i += 1) {
       d = d * n + b[i];
       const e = Math.floor(d / m);
       d -= e * m;

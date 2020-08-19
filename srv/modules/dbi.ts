@@ -1,9 +1,16 @@
-import { getRepository, BaseEntity, Connection, getConnectionOptions, getConnectionManager } from 'typeorm';
+import {
+  getRepository,
+  BaseEntity,
+  Connection,
+  getConnectionOptions,
+  getConnectionManager,
+} from 'typeorm';
 import { Wq8pw } from '../entity/Wq8pw';
 import { TypeOrmWinstonLogger, logger } from './logger';
 
-export class Dbi {
+export default class Dbi {
   protected connection: Connection|null = null;
+
   protected connectionName: string;
 
   constructor(name: string) {

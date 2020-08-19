@@ -1,6 +1,8 @@
 import { Des } from './des';
 import { Dbi } from './dbi';
 import allConfig from '../../config.json';
+import env from './env';
+
 interface Iconfig {
   [key: string]: {
     des: {
@@ -20,10 +22,9 @@ interface Iconfig {
   };
 }
 
-export const env = process.env.NODE_ENV as string;
 const config = (allConfig.uniquely as Iconfig)[env];
-export const recaptcha = config.recaptcha;
-export const c: Des =  new Des(new Uint8Array(
+export const { recaptcha } = config;
+export const c: Des = new Des(new Uint8Array(
   config.des.key.split('').map((v) => v.charCodeAt(0)),
 ));
 export const dbi: Dbi = new Dbi(env);

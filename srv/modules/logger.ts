@@ -4,7 +4,7 @@
 import { createLogger, format, transports } from 'winston';
 import morgan from 'morgan';
 import { FileLogger, Logger } from 'typeorm';
-import { env } from './store';
+import env from './env';
 
 /**
  * logger 取得
@@ -15,7 +15,9 @@ export const logger = (() => {
     format: format.combine(
       format.timestamp(),
       format.cli(),
-      format.printf((info) => `[${info.timestamp}] ${info.level} ${info.message}`),
+      format.printf(
+        (info) => `[${info.timestamp}] ${info.level} ${info.message}`,
+      ),
     ),
   });
   const fileOut = new transports.File({
@@ -60,6 +62,7 @@ export const httpLogger = morgan('combined', {
  * DB の logger を設定する
  */
 export class TypeOrmWinstonLogger extends FileLogger implements Logger {
+  // eslint-disable-next-line class-methods-use-this
   protected write(strings: string|string[]) {
     logger.info(strings instanceof Array ? JSON.stringify(strings) : strings);
   }
