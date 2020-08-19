@@ -5,7 +5,7 @@ import {
   getConnectionOptions,
   getConnectionManager,
 } from 'typeorm';
-import { Wq8pw } from '../entity/Wq8pw';
+import Wq8pw from '../entity/Wq8pw';
 import { TypeOrmWinstonLogger, logger } from './logger';
 
 export default class Dbi {
