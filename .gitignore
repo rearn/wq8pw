@@ -2,6 +2,7 @@
 config.json
 public/robots.txt
 db/
+public/favicon.ico
 
 .DS_Store
 node_modules
