@@ -1,5 +1,5 @@
 import { Des } from './des';
-import { Dbi } from './dbi';
+import Dbi from './dbi';
 import allConfig from '../../config.json';
 import env from './env';
 
