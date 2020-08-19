@@ -1,14 +1,20 @@
-import { Entity, Column, PrimaryColumn, Generated, BaseEntity } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  Generated,
+  BaseEntity,
+} from 'typeorm';
 
 @Entity()
-export class Wq8pw extends BaseEntity {
+export default class Wq8pw extends BaseEntity {
   @Generated('increment')
   @PrimaryColumn('bigint', { unsigned: true })
   public id!: string;
 
   @Column('varchar', { length: 1024, nullable: false })
-  public uri: string = '';
+  public uri = '';
 
   @Column('boolean', { nullable: false })
-  public antenna: boolean = false;
+  public antenna = false;
 }

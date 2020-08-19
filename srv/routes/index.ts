@@ -1,5 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import express from 'express';
 import * as store from '../modules/store';
+
 const router = express.Router();
 
 router.get('/:id', async (req, res, next) => {
@@ -15,7 +17,7 @@ router.get('/:id', async (req, res, next) => {
     res.sendStatus(404);
     return next();
   }
-  if (! url.antenna) {
+  if (!url.antenna) {
     return res.redirect(301, url.uri);
   }
   const html = `
