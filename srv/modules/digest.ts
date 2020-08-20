@@ -93,12 +93,12 @@ export default (
   ];
   const w = [
     'Digest realm="http-auth@example.org"',
-    'qop="auth',
+    'qop="auth"',
     'algorithm=MD5',
     `nonce="${nonce2}"`,
     `opaque="${opaque2}"`,
   ];
-  res.append('WWW-Authenticate', w);
-  res.append('WWW-Authenticate', v);
+  res.append('WWW-Authenticate', w.join(', '));
+  res.append('WWW-Authenticate', v.join(', '));
   res.status(401).end();
 };
