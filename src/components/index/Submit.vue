@@ -37,6 +37,7 @@ const recaptchaInit = new RecaptchaInit();
 interface Msg {
   uri: string;
   antenna: boolean;
+  'g-recaptcha-response'?: string;
   key?: number;
 }
 
@@ -51,10 +52,14 @@ interface Msg {
       this.$store.dispatch('getRecaptchaSitekeyAsync'),
       recaptchaInit.wait(),
     ]).then(() => {
-      if (this.$store.state.Recaptcha.use) {
+      if (this.$store.state.Recaptcha !== undefined
+        && this.$store.state.Recaptcha.use) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (window as any).grecaptcha.render('recaptcha', {
           sitekey: this.$store.state.Recaptcha.sitekey,
+          callback: (token: string) => {
+            this.$data.token = token;
+          },
         });
       }
     });
@@ -67,6 +72,8 @@ export default class Submit extends Vue {
 
   private antenna = false;
 
+  private token = '';
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private message: Msg[] = [];
 
@@ -75,7 +82,14 @@ export default class Submit extends Vue {
   public send() {
     const { uri } = this;
     const { antenna } = this;
-    const a: Msg = { uri, antenna };
+    const { token } = this;
+    const a: Msg = (() => {
+      if (this.$store.state.Recaptcha !== undefined
+        && this.$store.state.Recaptcha.use) {
+        return { uri, antenna, 'g-recaptcha-response': token };
+      }
+      return { uri, antenna };
+    })();
     console.log(a);
     axios.post('/api/v1/accept/post', a).then((b) => {
       const d = b.data;
