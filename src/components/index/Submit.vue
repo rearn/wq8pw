@@ -52,7 +52,8 @@ interface Msg {
       this.$store.dispatch('getRecaptchaSitekeyAsync'),
       recaptchaInit.wait(),
     ]).then(() => {
-      if (this.$store.state.Recaptcha.use) {
+      if (this.$store.state.Recaptcha !== undefined
+        && this.$store.state.Recaptcha.use) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (window as any).grecaptcha.render('recaptcha', {
           sitekey: this.$store.state.Recaptcha.sitekey,
@@ -83,7 +84,8 @@ export default class Submit extends Vue {
     const { antenna } = this;
     const { token } = this;
     const a: Msg = (() => {
-      if (this.$store.state.Recaptcha.use) {
+      if (this.$store.state.Recaptcha !== undefined
+        && this.$store.state.Recaptcha.use) {
         return { uri, antenna, 'g-recaptcha-response': token };
       }
       return { uri, antenna };
